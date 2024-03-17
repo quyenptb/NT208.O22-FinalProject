@@ -1,0 +1,103 @@
+.navbar {
+    background-color: #2992d0;
+    transition: transform 0.3s ease;
+ }
+
+ .navbar a:active {
+    transform: scale(0.95);
+  }
+
+  .navbar a:hover {
+    background-color: #28306a;
+    /*color: #28306a; */
+    color: white;
+    border-radius: 6px;
+  }
+  .navbar .account:hover {
+    background-color: #f8f8f8;
+    /*color: #28306a; */
+    color: white;
+    border-radius: 6px;
+  }
+
+.navbar li {
+    padding: 4px;
+}
+
+@media (max-width: 767px) {
+    .sidebar, .ranking-table {
+      display: none;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .sidebar, .ranking-table, .notification, .card-footer a span {
+      display: none;
+    }
+    .little-main {
+        width: 100%;
+    }
+  }
+
+  .main {
+    display: flex;
+    flex: 1;
+  }
+
+  .sidebar {
+    flex: 1 1 20% ;
+  }
+
+  .btn-group {
+    margin: 4px;
+    display: inline-block;
+    justify-content: center;
+    flex: 2 2 60%;
+  }
+
+ .ranking-table  {
+    flex: 1 1 30%;
+    align-self: flex-start;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+ }
+
+ .ranking-table * {
+    text-align: center;
+ }
+ 
+ .little-main {
+    display: flex;
+    flex-direction: column;
+ }
+
+ .card {
+    border: none;
+ }
+ .card-title, .card-header, .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+ }
+
+.card-header a, .card-footer a {
+    text-decoration: none;
+}
+ .card-body {
+    border: 2px solid #ccc;
+    border-radius: 8px; 
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    background: linear-gradient(to right, #ffffff, #e6e6e6);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+ }
+.card-body:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.footer {
+    background-color: #28306a;
+}
