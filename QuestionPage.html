@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang Đặt Câu Hỏi</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html {
+      min-height: 100vh;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #f0f2f5;
+      height: 100%;
+    }
+
+    .my-navbar {
+      background-color: #007bff;
+      color: #ffffff;
+    }
+
+    .footer {
+      background-color: #007bff;
+      color: #ffffff;
+      bottom: 0;
+      position: fixed;
+      width: 100%;
+    }
+
+    .navbar-brand,
+    .nav-link,
+    .footer a {
+      color: #ffffff !important;
+    }
+
+    .container {
+      max-width: 800px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      color: #495057;
+    }
+
+    .btn-primary {
+      background-color: #28a745;
+      border-color: #28a745;
+    }
+
+    .footer {
+      padding: 20px 0;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+
+<div>
+  <nav class="navbar navbar-expand-lg my-navbar">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img src="DahoHelping.png" alt="Bootstrap" width="150px" height="100px">
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-3 mb-lg-0">
+
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#"> Trang chủ </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="#"> Giới thiệu </a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Thông báo
+            </a>
+
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Something</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          </li>
+
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Tìm kiếm câu hỏi/yêu cầu" aria-label="Search"
+            style="width: 300px; float: left;">
+          <button class="btn btn-outline-success" type="submit">
+            <img src="search.png" alt="search-icon" style="width: 20px; height: 20px;">
+          </button>
+        </form>
+
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle account" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <img src="account.png" alt="acoount" style="width: 40px; height: 40px;">
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Đăng nhập</a></li>
+            <li><a class="dropdown-item" href="#">Đăng kí</a></li>
+          </ul>
+
+        </div>
+      </div>
+  </nav>
+  <div class="container mt-5">
+    <h2 class="mb-4">Đặt Câu Hỏi</h2>
+    <!-- Form to submit a new question -->
+    <form>
+      <div class="form-group">
+        <label for="newQuestion" class="form-label">Câu Hỏi Mới</label>
+        <textarea class="form-control" id="newQuestion" rows="3" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Gửi Câu Hỏi</button>
+    </form>
+  </div>
+  <footer class=" text-primary text-center text-lg-start footer">
+    <!-- Tạo một Footer dạng primary, màu chữ trắng, căn chữ giữa và -->
+    <!-- Grid container -->
+    <div class="container p-4">
+      <!--Grid row-->
+      <div class="row">
+        <!--Grid column-->
+        <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+          <h5 class="text-uppercase">DAHOHELPING</h5>
+
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iste atque ea quis
+            molestias. Fugiat pariatur maxime quis culpa corporis vitae repudiandae aliquam
+            voluptatem veniam, est atque cumque eum delectus sint!
+          </p>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase">Liên hệ</h5>
+
+          <ul class="list-unstyled mb-0">
+            <li>
+              <a href="#!" class="text-white">Thành viên 1</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Thành viên 2</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Thành viên 3</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Thành viên 4</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+
+        <!--Grid column-->
+        <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+          <h5 class="text-uppercase mb-0">Tài liệu</h5>
+
+          <ul class="list-unstyled">
+            <li>
+              <a href="#!" class="text-white">Link 1</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 2</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 3</a>
+            </li>
+            <li>
+              <a href="#!" class="text-white">Link 4</a>
+            </li>
+          </ul>
+        </div>
+        <!--Grid column-->
+      </div>
+      <!--Grid row-->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+      © 2024 Copyright:
+      <a class="text-white" href="https://DahoHelping.com/">DahoHelping.com</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  </body>
+
+</html>
