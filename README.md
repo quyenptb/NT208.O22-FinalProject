@@ -10,6 +10,7 @@ Chào mừng bạn đến với DahoHelping - trang web hỗ trợ học sinh, s
 DahoHelping được thành lập vào năm 2024 bởi nhóm sinh viên trường Đại học Công nghệ thông tin. Chúng tôi cung cấp một nền tảng đáng tin cậy để hỏi đáp, chia sẻ kiến thức và kinh nghiệm học tập.
 
 ## Tính năng cơ bản
+![alt text](image.png)
 - Đăng kí tài khoản, Đăng nhập dành cho người dùng và Admin
 - Trang chủ hiển thị liên tục các câu hỏi/yêu cầu từ người dùng
 - Lọc câu hỏi theo trường Đại học, Khoa, Ngành. Đặc biệt, loại câu hỏi **DahoHelping** dành riêng cho chủ đề đời sống sinh viên
