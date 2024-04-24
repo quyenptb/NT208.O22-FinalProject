@@ -1,0 +1,28 @@
+.login-container {
+    background-color: #B2FFFF;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+  }
+  
+  .login-form input,
+  .login-form select,
+  .login-form textarea,
+  .login-form button {
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+  
+  .login-form button {
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+  }
+  
