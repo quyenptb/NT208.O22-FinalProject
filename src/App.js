@@ -68,6 +68,9 @@ import khsk1 from './CarouselImage/khsk1.jpg';
 import khsk2 from './CarouselImage/khsk2.jpg';
 import khsk3 from './CarouselImage/khsk3.jpg';
 
+import avatar from './icons/minhhieu.webp'
+import avatar1 from './icons/dieuhuyen.jpeg'
+
 
 import Card from './Card';
 import IntroductionContent from './IntroductionContent';
@@ -81,24 +84,36 @@ import DRL from './DRL.js'
 import Notification from './Notification.js';
 import UserPage from './UserPage.js';
 
-
  {/*Dataset Giả */}
-const user = [
+ const user = [
   {
-    id: '1',
-    last_name: 'Trần Thị',
-    first_name: 'Hà Trâm',
-    uni_id: '1',
-    score: 300
+      user_id: 1,
+      username: 'hieuthuhai',
+      avatar: avatar,
+      fullname: "Trần Minh Hiếu",
+      uni_id: '1',
+      fal_id: "Khoa học máy tính",
+      maj_id: "Khoa học máy tính",
+      email: "minhhieutran@gmail.com",
+      hometown: "Khánh Hòa",
+      score: '300',
+      hobby: "Lập trình, đọc sách"
   },
   {
-    id: '2',
-    last_name: 'Nguyễn Đình',
-    first_name: 'Anh Khang',
-    uni_id: '5',
-    score: 400
-  }
-] 
+    user_id: 2,
+    username: 'dieuhuyen098',
+    avatar: avatar1,
+    fullname: "Nguyễn Diệu Huyền",
+    uni_id: '3', //khóa ngoại trỏ đến để lấy dữ liệu từ bảng Uni
+    fal_id: "Nhật Bản học", 
+    maj_id: "Nhật Bản học",
+    email: "shijukukaizen@gmail.com",
+    hometown: "Tuyên Quang",
+    score: 450,
+    hobby: "Nghe nhạc, học tiếng nhật, đọc sách"
+}
+
+]
 const faculty = [
   {
     id: "1", name: "Khoa học máy tính"
@@ -866,6 +881,9 @@ const subjects_ussh = {
   }
 
 function MyUserPage({subjects}) {
+  const { username } = useParams();
+  const user_example = user.find((user) => user.username === username);
+
   return (
     <div>
     <NavBar/>
@@ -873,7 +891,7 @@ function MyUserPage({subjects}) {
           <Sidebar className="sidebar" subjects={subjects.subjects} />
           <div className="little-main">
           <CreateQuestionButton />
-          <UserPage />
+          <UserPage user_example={user_example} />
           </div>
           <div className="right">
             <BulletinCard />
@@ -916,7 +934,7 @@ return (
 
         <Route path='/dang-nhap' element={<LoginPage />} />
 
-        <Route path='/nguoi-dung' element={<MyUserPage subjects={subjects} />} />
+        <Route path='/nguoi-dung/:username' element={<MyUserPage subjects={subjects} />} />
 
     </Routes>
 );

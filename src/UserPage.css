@@ -1,6 +1,7 @@
 .user-page {
-    padding: 5vh;
     margin: 0 auto;
+    margin-top: 5vh;
+    padding: 5vh;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     background-color: #fff;
@@ -9,6 +10,12 @@
   .user-header {
     text-align: center;
     margin-bottom: 20px;
+  }
+
+  .user-uni {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
   }
   
   .avatar {

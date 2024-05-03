@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './UserPage.css';
+import bku from './icons/bku.webp'
 
-const UserPage = () => {
+const UserPage = ({user_example}) => {
   const [user, setUser] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [editedUser, setEditedUser] = useState(null);
@@ -13,10 +14,12 @@ const UserPage = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get('https://jsonplaceholder.typicode.com/users/7');
-        setUser(response.data);
-        setEditedUser(response.data);
+        //setUser(response.data); //thả user vào 
+        //ví dụ:
+        setUser(user_example);
+        setEditedUser(user_example);
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error('Lỗi xảy ra khi lấy dữ liệu: ', error);
       }
     };
 
@@ -39,7 +42,7 @@ const UserPage = () => {
   };
 
   const handleChange = e => {
-    const { name, value } = e.target;
+    const { name, value } = e.target; 
     setEditedUser({ ...editedUser, [name]: value });
   };
 
@@ -48,11 +51,22 @@ const UserPage = () => {
       {user ? (
         <>
           <div className="user-header">
-            <img src={`./icons/`} alt={user.name} className="avatar" />
-            <h1>{isEditing ? <input type="text" name="name" value={editedUser.name} onChange={handleChange} /> : user.name}</h1>
+          <img src={user.avatar} alt={user.username} className="avatar" />
+            <h1>
+                <img src={user.uni_id} alt={user.uni_id} className='user-uni' />
+                {isEditing ? <input type="text" name="fullname" value={editedUser.fullname} onChange={handleChange} /> : user.fullname}</h1>
+                <p><i> {isEditing ? `@${user.username}` : `@${user.username}`}</i></p>
             <p>{isEditing ? <input type="text" name="email" value={editedUser.email} onChange={handleChange} /> : user.email}</p>
-            <p>{isEditing ? <input type="text" name="website" value={editedUser.website} onChange={handleChange} /> : user.website}</p>
-            {isEditing ? (
+            <p>Khoa {user.fal_id}, ngành {user.maj_id}</p>
+          </div>
+          <div className="user-details">
+            <h2>Thông tin cá nhân</h2>
+            <p>Điểm DahoHelping: {user.score} điểm</p>
+            <p>Email: {isEditing ? <input type="text" name="email" value={editedUser.email} onChange={handleChange} /> : user.email}</p>
+            <p>Quê quán: {isEditing ? <input type="text" name="hometown" value={editedUser.hometown} onChange={handleChange} /> : user.hometown}</p> {/*hometown*/}
+            <p>Sở thích: {isEditing ? <input type="text" name="hobby" value={" "} onChange={handleChange} /> : user.hobby}</p>
+          </div>
+          {isEditing ? (
               <>
                 <button onClick={handleSaveEdit}>Save</button>
                 <button onClick={handleCancelEdit}>Cancel</button>
@@ -60,15 +74,8 @@ const UserPage = () => {
             ) : (
               <button onClick={handleEdit}>Edit</button>
             )}
-          </div>
-          <div className="user-details">
-            <h2>Contact Information</h2>
-            <p>Email: {isEditing ? <input type="text" name="email" value={editedUser.email} onChange={handleChange} /> : user.email}</p>
-            <p>Phone: {isEditing ? <input type="text" name="phone" value={editedUser.phone} onChange={handleChange} /> : user.phone}</p>
-            <p>Address: {isEditing ? <input type="text" name="address" value={editedUser.address} onChange={handleChange} /> : `${user.address.city}, ${user.address.street}, ${user.address.suite}`}</p>
-          </div>
           <div className="user-posts">
-            <h2>Recent Posts</h2>
+            <h2>Câu hỏi</h2>
             {user.posts && user.posts.length > 0 ? (
               <ul>
                 {user.posts.map(post => (

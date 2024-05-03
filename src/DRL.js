@@ -9,7 +9,7 @@ const DRL = ({ user, university }) => {
   const [notisetting, setNotiSetting] = useState([]);
   const [showNotification, setShowNotification] = useState(false); // Thêm state để kiểm soát hiển thị thông báo
 
-  const thisUser = user[1];
+  const thisUser = user[0];
   const uni_drl = university.find(uni => uni.id === thisUser.uni_id).drl;
   const newDrl = Math.floor(exchangeScore / 10) * uni_drl;
 
@@ -19,6 +19,7 @@ const DRL = ({ user, university }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    
     if (exchangeScore <= thisUser.score) {
       if (exchangeScore % 10 !== 0) {
         setShowNotification(true);
