@@ -19,7 +19,7 @@ const DRL = ({ user, university }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    
+
     if (exchangeScore <= thisUser.score) {
       if (exchangeScore % 10 !== 0) {
         setShowNotification(true);
@@ -41,7 +41,7 @@ const DRL = ({ user, university }) => {
     <>
       <h1 className="drl-title">QUY ĐỔI ĐIỂM RÈN LUYỆN</h1>
       <p>
-        DahoHelping liên kết với các <Link to="/gioi-thieu"> trường Đại học và THPT </Link> trong Hệ thống Đại học
+        DahoHelping liên kết với các <Link to="/gioi-thieu" target='_blank'> trường Đại học và THPT </Link> trong Hệ thống Đại học
         Quốc Gia Tp Hồ Chí Minh để thực hiện quy đôi điểm cho những sinh viên năng nổ hoạt động và tích lũy được nhiều
         điểm hệ thống. Tùy thuộc vào mỗi trường sẽ có quy định mức điểm được chuyển đổi sang điểm rèn luyện:
       </p>

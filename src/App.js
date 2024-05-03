@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext, createContext } from 'react';
 import axios from 'axios';
 import {Routes, Route, Link, Outlet,  useParams, BrowserRouter as Router} from 'react-router-dom'
 import './App.css';
@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalculator, faPlusMinus, faCode, faComputer, faBook, faMicrochip, faLanguage, faCommentDots, faThumbsUp, faThumbsDown, faFlag, faBucket } from '@fortawesome/free-solid-svg-icons';
 
 import { useNavigate } from 'react-router-dom';
+import * as img from './images';
 
 import banner from './CarouselImage/dahohelping-banner.png'
 import account from './icons/account.png'
@@ -20,6 +21,8 @@ import iu from './icons/iu.png'
 import bku from './icons/bku.webp'
 import uit from './icons/uit.png'
 import agu from './icons/agu.png'
+import tthc from './icons/tthc.jpg'
+import mttn from './icons/mttn.jpg'
 import bentre from './icons/bentre.png'
 import thsp from './icons/thsp.png'
 import pin from './icons/pin.png'
@@ -35,18 +38,6 @@ import gdtc1 from './icons/gdtc1.jpg'
 import lsvmtg from './icons/lsvmtg.jpg'
 import ppnckh from './icons/ppnckh.jpg'
 import tkckhxh from './icons/tkckhxh.png'
-
-import bku1 from './CarouselImage/bku1.webp';
-import bku2 from './CarouselImage/bku2.webp';
-import bku3 from './CarouselImage/bku3.jpg';
-
-import khtn1 from './CarouselImage/khtn1.jpg';
-import khtn2 from './CarouselImage/khtn2.jpg';
-import khtn3 from './CarouselImage/khtn3.jpg';
-
-import ussh1 from './CarouselImage/ussh1.jpg';
-import ussh2 from './CarouselImage/ussh2.jpg';
-import ussh3 from './CarouselImage/ussh3.jpg';
 
 import iu1 from './CarouselImage/iu1.jpg';
 import iu2 from './CarouselImage/iu2.jpg';
@@ -83,6 +74,7 @@ import RegisterPage from './RegisterPage';
 import DRL from './DRL.js'
 import Notification from './Notification.js';
 import UserPage from './UserPage.js';
+import context from 'react-bootstrap/esm/AccordionContext.js';
 
  {/*Dataset Giả */}
  const user = [
@@ -96,7 +88,7 @@ import UserPage from './UserPage.js';
       maj_id: "Khoa học máy tính",
       email: "minhhieutran@gmail.com",
       hometown: "Khánh Hòa",
-      score: '300',
+      score: 300,
       hobby: "Lập trình, đọc sách"
   },
   {
@@ -197,7 +189,7 @@ const university = [
     name: "Trường Đại học Bách Khoa",
     icon: bku,
     code: "bku",
-    src: [bku1, bku2, bku3],
+    src: [img.bku1, img.bku2, img.bku3],
     drl: 1,
   },
   {
@@ -205,7 +197,7 @@ const university = [
   name: 'Trường Đại học Khoa học tự nhiên',
   icon: khtn,
   code: "khtn",
-  src: [khtn1, khtn2, khtn3],
+  src: [img.khtn1, img.khtn2, img.khtn3],
   drl: 2
 },
   {
@@ -213,7 +205,7 @@ const university = [
     name: 'Trường Đại học Khoa học Xã hội và Nhân văn',
     icon: ussh,
     code: "ussh",
-    src: [ussh1, ussh2, ussh3],
+    src: [img.ussh1, img.ussh2, img.ussh3],
     drl: 1
   },  
   {
@@ -221,7 +213,7 @@ const university = [
     name: "Trường Đại học Quốc tế",
     icon: iu,
     code: "iu",
-    src: [iu1, iu2, iu3],
+    src: [img.iu1, img.iu2, img.iu3],
     drl: 5
     },
     {
@@ -229,7 +221,7 @@ const university = [
      name: 'Trường Đại học Công nghệ thông tin',
      icon: uit,
      code: "uit",
-     src: [uit1, uit2, uit3],
+     src: [img.uit1, img.uit2, img.uit3],
      drl: 3
     }, 
     {
@@ -237,7 +229,7 @@ const university = [
       name: 'Trường Đại học Kinh tế - Luật',
       icon: uel,
       code: "uel",
-      src: [uel1, uel2, uel3],
+      src: [img.uel1, img.uel2, img.uel3],
       drl: 5
     },
     {
@@ -245,7 +237,7 @@ const university = [
       name: 'Trường Đại học An Giang',
       icon: agu,
       code: "agu",
-      src: [agu1, agu2, agu3],
+      src: [img.agu1, img.agu2, img.agu3],
       drl: 10
     },
     {
@@ -253,43 +245,43 @@ const university = [
     name: 'Trường Đại học Khoa học sức khỏe',
     icon: khsk,
     code: "khsk",
-    src: [khsk1, khsk2, khsk3],
+    src: [img.khsk1, img.khsk2, img.khsk3],
     drl: 1
   },
   {
     id: "9",
     name: 'Viện Môi trường - Tài nguyên',
-    icon: bku,
-    code: "bku",
-    src: [bku1, bku2, bku3]
+    icon: mttn,
+    code: "mttn",
+    src: [img.mttn1, img.mttn2, img.mttn3]
   },
   {
     id: "10",
     name: 'Khoa Chính trị - Hành chính',
-    icon: bku,
-    code: "bku",
-    src: [bku1, bku2, bku3]
+    icon: tthc,
+    code: "tthc",
+    src: [img.tthc1, img.tthc2, img.tthc3]
   },
   {
     id: "11",
     name: 'Phân hiệu ĐHQG tại Bến Tre',
-    icon: bku,
-    code: "bku",
-    src: [bku1, bku2, bku3]
+    icon: bentre,
+    code: "bentre",
+    src: [img.bentre1, img.bentre2, img.bentre3]
   },
   {
     id: "12",
     name: 'Trường Phổ thông Năng khiếu',
-    icon: bku,
-    code: "bku",
-    src: [bku1, bku2, bku3]
+    icon: ptnk,
+    code: "ptnk",
+    src: [img.ptnk1, img.ptnk2, img.ptnk3]
   },
   {
     id: "13",
     name: 'Trường Trung học Thực hành sư phạm An Giang',
-    icon: bku,
-    code: "bku",
-    src: [bku1, bku2, bku3]
+    icon: thsp,
+    code: "thsp",
+    src: [img.thsp1, img.thsp2, img.thsp3]
   }
 ]
 const cards =[
@@ -428,12 +420,13 @@ function NavBar() {
   );
 }
 
-function Sidebar({subjects}) {
+function Sidebar() {
+  const { uni, setUni, subjects, setSubjects } = useContext(uniContext);
   return (
     <nav className="col-2 col-md-3 col-lg-2 d-md-block bg-light d-sm-none sidebar">
       <div className="sidebar-sticky">
         <ul className="nav flex-column">
-        {subjects.map(({ key, icon, label, illust, desc }) => (
+        {subjects.subjects.map(({ key, icon, label, illust, desc }) => (
             <NavItem icon={icon} label={label} key={key} illust={illust} desc={desc} />
           ))}
         </ul>
@@ -502,31 +495,64 @@ function DropDownCustom({toggle, listItems, setUni})
   )
 }
 
-function FilterDropdown({setUni}) {
-  //let name = [uni, fac, maj, course, daho];
-  //const [uni, setUni] = useState(["Trường Đại học"]);
+function FilterDropdown({ setUni }) {
   const [uniActived, setUniActived] = useState();
   const [fac, setFac] = useState(["Khoa"]);
   const [maj, setMaj] = useState(["Ngành"]);
   const [course, setCourse] = useState(["Môn"]);
   const [daho, setDaho] = useState(["DahoHelping"]);
 
+  // Bước 1: Tạo state là trạng thái lọc
+  const [filterState, setFilterState] = useState({
+    DahoHelping: [],
+    Others: [null, null, null, null]
+  });
+
+  // Bước 2: Gửi API về cho backend mỗi khi DahoHelping hoặc Others được cập nhật
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('/api/filter', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(filterState)
+        });
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        //setUni(data); // Cập nhật các card với dữ liệu mới
+      } catch (error) {
+        console.error('There was an error!', error);
+      }
+    };
+
+    fetchData();
+  }, [filterState]);
+
+  // Cập nhật trạng thái lọc khi một dropdown được chọn
+  const handleSelect = (dropdownName, selectedItem) => {
+    setFilterState(prevState => ({
+      ...prevState,
+      [dropdownName]: selectedItem
+    }));
+  };
+
   return (
     <>
-    <div className="btn-group">
-       <DropDownCustom toggle={daho} listItems={dahohelping} setUni={setUni}/>
-       {/*Chỉ được chọn khi DahoHelping = "Học tập"*/}
-      <DropDownCustom toggle={"Trường Đại học"} listItems={university} setUni={setUni}  /> 
-      {/* truy xuất CSDL để lọc kép. Ví dụ: User chọn trường A thì
-      truy xuất quan hệ tương ứng để lấy ra các Khoa và áp dụng vào Button Khoa */}
-      <DropDownCustom toggle={fac} listItems={faculty} setUni={setUni}/>
-      <DropDownCustom toggle={maj} listItems={major} setUni={setUni}/>
-      <DropDownCustom toggle={course} listItems={courses} setUni={setUni}/>
-     </div>
-  
-     </>
+      <div className="btn-group">
+        <DropDownCustom setUni={setUni} toggle={daho} listItems={dahohelping} onSelect={item => handleSelect('DahoHelping', item)} />
+        <DropDownCustom setUni={setUni} toggle={"Trường Đại học"} listItems={university} onSelect={item => handleSelect('Others', [item, null, null, null])} />
+        <DropDownCustom setUni={setUni} toggle={fac} listItems={faculty} onSelect={item => handleSelect('Others', [filterState.Others[0], item, null, null])} />
+        <DropDownCustom setUni={setUni} toggle={maj} listItems={major} onSelect={item => handleSelect('Others', [filterState.Others[0], filterState.Others[1], item, null])} />
+        <DropDownCustom setUni={setUni} toggle={course} listItems={courses} onSelect={item => handleSelect('Others', [filterState.Others[0], filterState.Others[1], filterState.Others[2], item])} />
+      </div>
+    </>
   );
 }
+
 
 function GroupCard({ cards }) {
   return (
@@ -773,9 +799,14 @@ const subjects_ussh = {
   //add thêm props vào do chưa học context
  
   function HomePage() {
-    const [uni, setUni] = useState("Trường Đại học");
-    const [subjects, setSubjects] = useState(subjects_uit);  
 
+    const { uni, setUni, subjects, setSubjects } = useContext(uniContext);
+
+    /*
+    const [uni, setUni] = useState("Trường Đại học");
+    const [subjects, setSubjects] = useState(subjects_uit); 
+    */ 
+    
     useEffect(() => {
       if (uni === "Trường Đại học") {
         setSubjects(subjects_uit);
@@ -789,8 +820,7 @@ const subjects_ussh = {
       <NavBar/>
       <Link to="/dang-ki" className='link' target='_blank'><img src={banner} alt='DahoHelpingBanner' style={{width: "100%", height: "100vh"}}/></Link>
       <div className="main">
-            <Sidebar className="sidebar" subjects={subjects.subjects} />
-
+            <Sidebar className="sidebar" />
             <div className="little-main">
             <CreateQuestionButton />
             <FilterDropdown className="filter-dropdown" setUni={setUni} />
@@ -806,7 +836,7 @@ const subjects_ussh = {
     )
   }
 
-  function AnsweringPage({subjects}) {
+  function AnsweringPage() {
 
     const { slug } = useParams();
     const card = cards.find((card) => card.id === slug);
@@ -815,7 +845,7 @@ const subjects_ussh = {
       <div>
       <NavBar/>
       <div className="main">
-            <Sidebar className="sidebar" subjects={subjects.subjects}/>
+            <Sidebar className="sidebar" />
 
             <div className="little-main">
             <CreateQuestionButton />
@@ -841,13 +871,12 @@ const subjects_ussh = {
     )
   }
 
-  function NotificationPage({subjects}) {
-
+  function NotificationPage() {
     return (
       <div>
       <NavBar/>
       <div className="main">
-            <Sidebar className="sidebar" subjects={subjects.subjects} />
+            <Sidebar className="sidebar" />
             <div className="little-main">
             <CreateQuestionButton />
             <NotificationBoard />
@@ -862,12 +891,13 @@ const subjects_ussh = {
             </div>
     )
   }
-  function DRLPage({subjects}) {
+  function DRLPage() {
+
     return (
       <>
       <NavBar/>
       <div className="main">
-            <Sidebar className="sidebar" subjects={subjects.subjects} />
+            <Sidebar className="sidebar"/>
             <div className="little-main">
             <DRL user={user} university={university} />
             </div>
@@ -880,7 +910,7 @@ const subjects_ussh = {
     )
   }
 
-function MyUserPage({subjects}) {
+function MyUserPage() {
   const { username } = useParams();
   const user_example = user.find((user) => user.username === username);
 
@@ -888,7 +918,7 @@ function MyUserPage({subjects}) {
     <div>
     <NavBar/>
     <div className="main">
-          <Sidebar className="sidebar" subjects={subjects.subjects} />
+          <Sidebar className="sidebar" />
           <div className="little-main">
           <CreateQuestionButton />
           <UserPage user_example={user_example} />
@@ -902,6 +932,7 @@ function MyUserPage({subjects}) {
   )
 }
 
+const uniContext = createContext();
 function App() {
   const [uni, setUni] = useState("Trường Đại học");
     const [subjects, setSubjects] = useState(subjects_uit);  
@@ -917,16 +948,17 @@ function App() {
   const [clickedId, setClickedId] = useState(null);
 
 return (
+  <uniContext.Provider value={{uni, setUni, subjects, setSubjects}} >
     <Routes>
         <Route path='/trang-chu' element={<HomePage/> }/>
 
-        <Route path='/tra-loi/:slug' element={<AnsweringPage subjects={subjects}/>}/>
+        <Route path='/tra-loi/:slug' element={<AnsweringPage/>}/>
          
         <Route path='/gioi-thieu' element={<IntroductionPage />} />
 
-        <Route path='/thong-bao-ca-nhan' element={<NotificationPage subjects={subjects} />} />
+        <Route path='/thong-bao-ca-nhan' element={<NotificationPage />} />
 
-        <Route path='/diem-ren-luyen' element={<DRLPage subjects={subjects} />} />
+        <Route path='/diem-ren-luyen' element={<DRLPage/>} />
 
         <Route path="*" element={<NotFoundPage />} />
 
@@ -934,9 +966,10 @@ return (
 
         <Route path='/dang-nhap' element={<LoginPage />} />
 
-        <Route path='/nguoi-dung/:username' element={<MyUserPage subjects={subjects} />} />
+        <Route path='/nguoi-dung/:username' element={<MyUserPage />} />
 
     </Routes>
+    </uniContext.Provider>
 );
 }
 
