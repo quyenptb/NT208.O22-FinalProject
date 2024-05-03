@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './RegisterPage.css';
+import daho from './icons/DahoHelping1.png'
 
 const universities = [
   "Đại học Bách Khoa",
@@ -73,8 +74,12 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="login-container">
-      <form className="login-form" onSubmit={handleSubmit}>
+    <>
+    <img className='register-logo-1' src= {daho} alt='Logo' />
+    
+    <div className="register-container">
+      <img className='register-logo' src= {daho} alt='Logo' />
+      <form className="register-form" onSubmit={handleSubmit}>
         <input type="text" name="lastName" id='lastName' placeholder="Họ" onChange={handleChange} />
         <input type="text" name="firstName" placeholder="Tên" onChange={handleChange} />
         <input type="text" name="username" placeholder="Tên tài khoản" onChange={handleChange} />
@@ -96,9 +101,10 @@ const RegisterPage = () => {
           {hobbies.map(hobby => <option key={hobby} value={hobby}>{hobby}</option>)}
         </select>
         <textarea name="bio" placeholder="Giới thiệu bản thân" onChange={handleChange}></textarea>
-        <button type="submit">Đăng nhập</button>
+        <button type="submit">Đăng kí</button>
       </form>
     </div>
+    </>
   );
 };
 

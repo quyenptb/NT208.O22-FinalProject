@@ -39,7 +39,6 @@ const cards =[
 }
 ]
 
-
 function CardTitle({title, award}) {
     return (
         <div className="card-title">

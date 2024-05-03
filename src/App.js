@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import {Routes, Route, Link, Outlet,  useParams, BrowserRouter as Router} from 'react-router-dom'
 import './App.css';
-import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Modal, Dropdown, DropdownItem, DropdownButton, Table } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Modal, Dropdown, DropdownItem, DropdownButton, Table, Image } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalculator, faPlusMinus, faCode, faComputer, faBook, faMicrochip, faLanguage, faCommentDots, faThumbsUp, faThumbsDown, faFlag, faBucket } from '@fortawesome/free-solid-svg-icons';
 
 import { useNavigate } from 'react-router-dom';
 
+import banner from './CarouselImage/dahohelping-banner.png'
 import account from './icons/account.png'
 import DahoHelping from './icons/DahoHelping1.png'
 import khtn from './icons/khtn.webp'
@@ -76,15 +77,28 @@ import CustomCard from './CustomCard';
 import NotFoundPage from './NotFoundPage';
 import LoginPage from './LoginPage.js';
 import RegisterPage from './RegisterPage';
+import DRL from './DRL.js'
+import Notification from './Notification.js';
+import UserPage from './UserPage.js';
 
 
  {/*Dataset Giả */}
 const user = [
   {
-    id: '1'
-
+    id: '1',
+    last_name: 'Trần Thị',
+    first_name: 'Hà Trâm',
+    uni_id: '1',
+    score: 300
+  },
+  {
+    id: '2',
+    last_name: 'Nguyễn Đình',
+    first_name: 'Anh Khang',
+    uni_id: '5',
+    score: 400
   }
-] //
+] 
 const faculty = [
   {
     id: "1", name: "Khoa học máy tính"
@@ -107,7 +121,7 @@ const faculty = [
   {
     id: "7", name: "Khoa học và kỹ thuật thông tin"
   },
-] //
+]
 const dahohelping = [
   {
     id: "1", name: "Học tập"
@@ -130,7 +144,7 @@ const dahohelping = [
   {
     id: "7", name: "Góp ý"
   }
-] //
+]
 const courses = [
   {
     id: '1', name: 'Hệ quản trị cơ sở dữ liệu'
@@ -150,7 +164,7 @@ const courses = [
   {
     id: '6', name: 'Quản lí dự án công nghệ thông tin'
   }
-] //là subjects
+]
 const major = [
   { id: '1', name: "Khoa học máy tính" },
   { id: '2', name: "Kỹ thuật phần mềm" },
@@ -161,63 +175,71 @@ const major = [
   { id: '7', name: "An toàn thông tin" },
   { id: '8', name: "Trí tuệ nhân tạo" },
   { id: '9', name: "Khoa học dữ liệu" }
-]; //
+]
 const university = [
   {
     id: "1",
     name: "Trường Đại học Bách Khoa",
     icon: bku,
     code: "bku",
-    src: [bku1, bku2, bku3]
+    src: [bku1, bku2, bku3],
+    drl: 1,
   },
   {
     id: "2",
   name: 'Trường Đại học Khoa học tự nhiên',
   icon: khtn,
   code: "khtn",
-  src: [khtn1, khtn2, khtn3]
+  src: [khtn1, khtn2, khtn3],
+  drl: 2
 },
   {
     id: "3",
     name: 'Trường Đại học Khoa học Xã hội và Nhân văn',
     icon: ussh,
     code: "ussh",
-    src: [ussh1, ussh2, ussh3]
+    src: [ussh1, ussh2, ussh3],
+    drl: 1
   },  
   {
     id: "4",
     name: "Trường Đại học Quốc tế",
     icon: iu,
     code: "iu",
-    src: [iu1, iu2, iu3]
+    src: [iu1, iu2, iu3],
+    drl: 5
     },
     {
       id: "5",
      name: 'Trường Đại học Công nghệ thông tin',
      icon: uit,
      code: "uit",
-     src: [uit1, uit2, uit3]
+     src: [uit1, uit2, uit3],
+     drl: 3
     }, 
     {
       id: "6",
       name: 'Trường Đại học Kinh tế - Luật',
       icon: uel,
       code: "uel",
-      src: [uel1, uel2, uel3]
+      src: [uel1, uel2, uel3],
+      drl: 5
     },
     {
       id: "7",
       name: 'Trường Đại học An Giang',
       icon: agu,
       code: "agu",
-      src: [agu1, agu2, agu3]
+      src: [agu1, agu2, agu3],
+      drl: 10
     },
     {
     id: "8",
     name: 'Trường Đại học Khoa học sức khỏe',
     icon: khsk,
     code: "khsk",
-    src: [khsk1, khsk2, khsk3]
+    src: [khsk1, khsk2, khsk3],
+    drl: 1
   },
   {
     id: "9",
@@ -254,7 +276,7 @@ const university = [
     code: "bku",
     src: [bku1, bku2, bku3]
   }
-] //
+]
 const cards =[
   {
   id: "0",
@@ -287,7 +309,6 @@ const cards =[
   text: "When you nest content inside a JSX tag, the parent component will receive that content in a prop called children"
 }
 ]
- //
 const ranking = [
   {
     id: 1,
@@ -330,11 +351,11 @@ function Rotation({userName}) {
         <WeatherComponent city={'Ho Chi Minh City'}/>
         <WeatherComponent city={'Quy Nhon'}/>
             <h1>
-                Chúc {userName} một ngày <div className="inner-headings">
+                Meow meow meow, {userName} trả lại <div className="inner-headings">
                     <span className="doRotate">
-                    năng suất <br/>
-                    hạnh phúc <br/>
-                    vui vẻ <br/>
+                    tâm trí <br/>
+                    tôi đây <br/>
+                    ~~ <br/>
                     </span>
                 </div>
             </h1>
@@ -360,6 +381,7 @@ function NavBar() {
         <Nav className="me-auto mb-3 mb-lg-0">
           <Nav.Link className='active'><Link to="/trang-chu" className='link'>Trang chủ </Link></Nav.Link>
           <Nav.Link><Link to="/gioi-thieu" className='link'>Giới thiệu </Link></Nav.Link>
+          <Nav.Link><Link to="/diem-ren-luyen" className='link'>Điểm rèn luyện</Link></Nav.Link>
           <NavDropdown title="Thông báo" className='link' id="basic-nav-dropdown">
            <NavDropdown.Item><Link to="/thong-bao-he-thong" className='link'>Hệ thống </Link></NavDropdown.Item>
             <NavDropdown.Item><Link to="/thong-bao-ca-nhan" className='link'>Cá nhân</Link></NavDropdown.Item>
@@ -745,11 +767,12 @@ const subjects_ussh = {
       } else {
         setSubjects(subjects_ussh);
       }
-    }, [uni]);  
+    }, [uni]);
 
     return (
       <div>
       <NavBar/>
+      <Link to="/dang-ki" className='link' target='_blank'><img src={banner} alt='DahoHelpingBanner' style={{width: "100%", height: "100vh"}}/></Link>
       <div className="main">
             <Sidebar className="sidebar" subjects={subjects.subjects} />
 
@@ -758,39 +781,26 @@ const subjects_ussh = {
             <FilterDropdown className="filter-dropdown" setUni={setUni} />
             <GroupCard cards={cards} />
             </div>
-
             <div className="right">
               <BulletinCard />
               <RankingTable ranking={ranking} />
             </div>
-
             </div>
+            <Footer />
             </div>
     )
   }
 
-  function AnsweringPage() {
-    const [uni, setUni] = useState("Trường Đại học");
-    const [subjects, setSubjects] = useState(subjects_uit);  
+  function AnsweringPage({subjects}) {
 
     const { slug } = useParams();
-
     const card = cards.find((card) => card.id === slug);
-
-
-    useEffect(() => {
-      if (uni === "Trường Đại học") {
-        setSubjects(subjects_uit);
-      } else {
-        setSubjects(subjects_ussh);
-      }
-    }, [uni]);  
 
     return (
       <div>
       <NavBar/>
       <div className="main">
-            <Sidebar className="sidebar" subjects={subjects.subjects} />
+            <Sidebar className="sidebar" subjects={subjects.subjects}/>
 
             <div className="little-main">
             <CreateQuestionButton />
@@ -816,17 +826,7 @@ const subjects_ussh = {
     )
   }
 
-  function NotificationPage() {
-    const [uni, setUni] = useState("Trường Đại học");
-    const [subjects, setSubjects] = useState(subjects_uit);
-
-    useEffect(() => {
-      if (uni === "Trường Đại học") {
-        setSubjects(subjects_uit);
-      } else {
-        setSubjects(subjects_ussh);
-      }
-    }, [uni]);
+  function NotificationPage({subjects}) {
 
     return (
       <div>
@@ -847,21 +847,68 @@ const subjects_ussh = {
             </div>
     )
   }
+  function DRLPage({subjects}) {
+    return (
+      <>
+      <NavBar/>
+      <div className="main">
+            <Sidebar className="sidebar" subjects={subjects.subjects} />
+            <div className="little-main">
+            <DRL user={user} university={university} />
+            </div>
+            <div className="right">
+              <BulletinCard />
+              <RankingTable ranking={ranking} />
+            </div> 
+            </div>       
+      </>
+    )
+  }
 
-
+function MyUserPage({subjects}) {
+  return (
+    <div>
+    <NavBar/>
+    <div className="main">
+          <Sidebar className="sidebar" subjects={subjects.subjects} />
+          <div className="little-main">
+          <CreateQuestionButton />
+          <UserPage />
+          </div>
+          <div className="right">
+            <BulletinCard />
+            <RankingTable ranking={ranking} />
+          </div>
+          </div>
+          </div>
+  )
+}
 
 function App() {
+  const [uni, setUni] = useState("Trường Đại học");
+    const [subjects, setSubjects] = useState(subjects_uit);  
+
+    useEffect(() => {
+      if (uni === "Trường Đại học") {
+        setSubjects(subjects_uit);
+      } else {
+        setSubjects(subjects_ussh);
+      }
+    }, [uni]);
+
   const [clickedId, setClickedId] = useState(null);
 
 return (
     <Routes>
-        <Route path='/trang-chu' element={<HomePage />}/>
+        <Route path='/trang-chu' element={<HomePage/> }/>
 
-        <Route path='/tra-loi/:slug' element={<AnsweringPage/>}/>
+        <Route path='/tra-loi/:slug' element={<AnsweringPage subjects={subjects}/>}/>
          
         <Route path='/gioi-thieu' element={<IntroductionPage />} />
 
-        <Route path='/thong-bao-ca-nhan' element={<NotificationPage />} />
+        <Route path='/thong-bao-ca-nhan' element={<NotificationPage subjects={subjects} />} />
+
+        <Route path='/diem-ren-luyen' element={<DRLPage subjects={subjects} />} />
 
         <Route path="*" element={<NotFoundPage />} />
 
@@ -869,17 +916,11 @@ return (
 
         <Route path='/dang-nhap' element={<LoginPage />} />
 
-
-
-
-
-
-
+        <Route path='/nguoi-dung' element={<MyUserPage subjects={subjects} />} />
 
     </Routes>
 );
 }
-
 
 export default App;
         

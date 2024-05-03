@@ -22,7 +22,7 @@ const CustomCard = ({title, award, user, time, subject, uni, text}) => {
   const handleCommentSubmit = (event) => {
     event.preventDefault();
     if (newComment.trim()) {
-      setComments([...comments, newComment]);
+      setComments([newComment, ...comments]);
       setNewComment('');
     }
     if (editorRef.current) {
@@ -81,12 +81,12 @@ const handleReportClick = (event) => {
               height: 200,
               menubar: false,
               plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
+                'advlist autolink lists link image imagetools charmap print preview anchor',
                 'searchreplace visualblocks code fullscreen',
                 'insertdatetime media table paste code help wordcount'
               ],
               toolbar:
-                'undo redo | formatselect | bold italic underline | \
+                'image | code | undo redo | formatselect | bold italic underline | \
                 alignleft aligncenter alignright alignjustify | \
                 bullist numlist outdent indent | removeformat | help'
             }}
@@ -103,7 +103,10 @@ const handleReportClick = (event) => {
       <div className="custom-card-footer">
         <h5 className="custom-card-comments-title">Trả lời:</h5>
         {comments.map((comment, index) => (
+          <div className="custom-card-comments-content">
+          <div> <span> Tên người đăng </span> <span>Thời gian đăng</span></div>
           <div key={index} className="custom-card-comment" style={{color: "black"}} dangerouslySetInnerHTML={{ __html: comment }}>
+          </div>
           </div>
         ))}
       </div>

@@ -67,8 +67,6 @@
     margin-right: 1vh;
   }
 
-  
-  
   .custom-card-comments-title {
     margin-bottom: 8px;
   }
@@ -79,4 +77,13 @@
     padding: 8px;
     border-radius: 4px;
   }
+  
+  .custom-card-comments-content {
+    border: 2px grey solid;
+    border-radius: 5px;
+    margin-bottom: 4vh;
+    background-color: #88e78c;
+    transition: cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+
   
