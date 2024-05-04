@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, createContext } from 'react';
+import React, { useEffect, useState, useRef, useContext, createContext } from 'react';
 import axios from 'axios';
 import {Routes, Route, Link, Outlet,  useParams, BrowserRouter as Router} from 'react-router-dom'
 import './App.css';
@@ -6,6 +6,8 @@ import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Modal, Dropdown, D
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalculator, faPlusMinus, faCode, faComputer, faBook, faMicrochip, faLanguage, faCommentDots, faThumbsUp, faThumbsDown, faFlag, faBucket } from '@fortawesome/free-solid-svg-icons';
+import { Editor } from '@tinymce/tinymce-react'; //Thư viện TinyMCE giúp tạo ô text có định dạng
+
 
 import { useNavigate } from 'react-router-dom';
 import * as img from './images';
@@ -25,7 +27,6 @@ import tthc from './icons/tthc.jpg'
 import mttn from './icons/mttn.jpg'
 import bentre from './icons/bentre.png'
 import thsp from './icons/thsp.png'
-import pin from './icons/pin.png'
 import uel from './icons/uel.png'
 import khsk from './icons/khsk.png'
 import nmlt from './icons/nmlt.png'
@@ -39,25 +40,6 @@ import lsvmtg from './icons/lsvmtg.jpg'
 import ppnckh from './icons/ppnckh.jpg'
 import tkckhxh from './icons/tkckhxh.png'
 
-import iu1 from './CarouselImage/iu1.jpg';
-import iu2 from './CarouselImage/iu2.jpg';
-import iu3 from './CarouselImage/iu3.jpg';
-
-import uit1 from './CarouselImage/uit1.jpg';
-import uit2 from './CarouselImage/uit2.jpg';
-import uit3 from './CarouselImage/uit3.jpg';
-
-import uel1 from './CarouselImage/uel1.jpg';
-import uel2 from './CarouselImage/uel2.jpg';
-import uel3 from './CarouselImage/uel3.jpg';
-
-import agu1 from './CarouselImage/agu1.jpg';
-import agu2 from './CarouselImage/agu2.jpg';
-import agu3 from './CarouselImage/agu3.jpg';
-
-import khsk1 from './CarouselImage/khsk1.jpg';
-import khsk2 from './CarouselImage/khsk2.jpg';
-import khsk3 from './CarouselImage/khsk3.jpg';
 
 import avatar from './icons/minhhieu.webp'
 import avatar1 from './icons/dieuhuyen.jpeg'
@@ -71,9 +53,10 @@ import CustomCard from './CustomCard';
 import NotFoundPage from './NotFoundPage';
 import LoginPage from './LoginPage.js';
 import RegisterPage from './RegisterPage';
-import DRL from './DRL.js'
+import DRL from './DRL.js';
 import Notification from './Notification.js';
 import UserPage from './UserPage.js';
+import CreateQuestionButton from './CreateQuestionButton.js';
 import context from 'react-bootstrap/esm/AccordionContext.js';
 
  {/*Dataset Giả */}
@@ -670,40 +653,6 @@ function Footer() {
   );
 }
 
-function CreateQuestionButton() {
-  const handleClick = () => {
-
-  }
-  return (
-    <div style={styles.button}>
-      <button style={styles.button}>Tạo câu hỏi trong vài giây!</button>
-    </div>
-  );
-}
-
-const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    //height: '100vh',
-  },
-  button: {
-    position: 'relative',
-    alignSelf: 'center',
-    padding: '15px 30px',
-    fontSize: '1.5rem',
-    fontWeight: 'bold',
-    backgroundColor: '#ff4500',
-    color: 'white',
-    border: 'none',
-    borderRadius: '8px',
-    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-    cursor: 'pointer',
-    transition: 'transform 0.3s ease'
-  }
-};
-
 const subjects_uit = {
   id: 5,
     subjects: [
@@ -921,7 +870,7 @@ function MyUserPage() {
           <Sidebar className="sidebar" />
           <div className="little-main">
           <CreateQuestionButton />
-          <UserPage user_example={user_example} />
+          {user_example ? <UserPage user_example={user_example} /> : <p>Không tìm thấy người dùng... Quay lại <Link to="/trang-chu" className='link'>trang chủ </Link> </p>}
           </div>
           <div className="right">
             <BulletinCard />
@@ -944,8 +893,6 @@ function App() {
         setSubjects(subjects_ussh);
       }
     }, [uni]);
-
-  const [clickedId, setClickedId] = useState(null);
 
 return (
   <uniContext.Provider value={{uni, setUni, subjects, setSubjects}} >

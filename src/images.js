@@ -11,7 +11,6 @@ export const uit = require('./icons/uit.png');
 export const agu = require('./icons/agu.png');
 export const bentre = require('./icons/bentre.png');
 export const thsp = require('./icons/thsp.png');
-export const pin = require('./icons/pin.png');
 export const uel = require('./icons/uel.png');
 export const khsk = require('./icons/khsk.png');
 export const nmlt = require('./icons/nmlt.png');
