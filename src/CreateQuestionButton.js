@@ -1,43 +1,237 @@
 import React, { useEffect, useState, useRef, useContext, createContext } from 'react';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button, Modal, Dropdown, DropdownItem, DropdownButton, Table, Image, FormSelect } from 'react-bootstrap';
 import { Editor } from '@tinymce/tinymce-react'; //Thư viện TinyMCE giúp tạo ô text có định dạng
+import * as img from './images';
+import { uniContext } from './App';
+import Notification from './Notification';
+
+import uni_data from './data/university.json';
+import maj_data from './data/major.json';
+import fal_data from './data/faculty.json';
+import sub_data from './data/subject.json';
+import daho_data from './data/dahohelping.json';  
+
+const fal = fal_data;
+const maj = maj_data;
+const uni = uni_data;
+const sub = sub_data;
+const daho = daho_data;
+
+
+const QuesContext = createContext();
+
+function DropDownCustom({ toggle, listItems, onSelect }) {
+
+const [value, setValue] = useState(toggle);
+
+const handleChoice = selectedItem => {
+  setValue(selectedItem);
+  onSelect(selectedItem);
+};
+
+return (
+  <DropdownButton title={value} id="dropdown-basic">
+      {Array.isArray(listItems) && listItems.map(item => (
+<Dropdown.Item key={item.id} onClick={() => handleChoice(item.name)}>
+  {item.name}
+</Dropdown.Item>
+))}
+  </DropdownButton>
+);
+}
+
+function FilterDropdown() {
+  const {filterState, setFilterState} = useContext(QuesContext);
+
+  /*
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await fetch('/api/filter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(filterState)
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      // setUni(data); // Update the cards with new data
+    } catch (error) {
+      console.error('There was an error!', error);
+    }
+  };
+
+  fetchData();
+}, [filterState]);
+*/
+
+const handleSelect = (dropdownName, selectedItem) => {
+  setFilterState(prevState => ({
+    ...prevState,
+    [dropdownName]: selectedItem
+  }));
+};
+
+return (
+  <>
+    <div className="btn-group">
+      <DropDownCustom
+        toggle="DahoHelping"
+        listItems={daho}
+        onSelect={item => handleSelect('DahoHelping', item)}
+      />
+      {filterState.DahoHelping === 'DahoHelping' && (
+          <>
+      <DropDownCustom
+        toggle="Trường Đại học"
+        listItems={uni}
+        onSelect={item => handleSelect('Others', [item, null, null, null])}
+      />
+      <DropDownCustom
+        toggle="Khoa"
+        listItems={fal}
+        onSelect={item => handleSelect('Others', [filterState.Others[0], item, null, null])}
+      />
+      <DropDownCustom
+        toggle="Ngành"
+        listItems={maj}
+        onSelect={item => handleSelect('Others', [filterState.Others[0], filterState.Others[1], item, null])}
+      />
+      <DropDownCustom
+        toggle="Môn"
+        listItems={sub}
+        onSelect={item => handleSelect('Others', [filterState.Others[0], filterState.Others[1], filterState.Others[2], item])}
+      />
+      </>
+  )}
+  </div>
+  </>
+  )
+}
 
 
 const CreateQuestionButton = () => {
-    const editorRef = useRef(null); //khởi tạo biến tham chiếu đến Editor
-    const [show, setShow] = useState(false);
-    const [title, setTitle] = useState('');
-    const [score, setScore] = useState(10);
-    const [content, setContent] = useState('');
-    const [A, setA] = useState(0); // Initial value for A
+  const [filterState, setFilterState] = useState({
+    DahoHelping: 'DahoHelping',
+    Others: [null, null, null, null] //trường, ngành, khoa, môn
+  })
+  const [notisetting, setNotiSetting] = useState([]);
+  const [showNotification, setShowNotification] = useState(false); // Thêm state để kiểm soát hiển thị thông báo
+  const QuesProvider = QuesContext.Provider;
+  const { currentUser } = useContext(uniContext);
+  const editorRef = useRef(null); //khởi tạo textarea
+  const [formData, setFormData] = useState({
+    title: '',
+    score: 0,
+    content: '',
+    DahoHelping: 'DahoHelping',
+    uni: '',
+    fal: '',
+    maj: '',
+    sub: '',
+  });
+  const [show, setShow] = useState(false);
+  const [A, setA] = useState(0); // Initial value for A
+
 
     useEffect(() => {
         // Simulate getting user's score after authentication
-        const userScore = getUserScore(); // Assume this function retrieves user's score
+        const userScore = currentUser.score; // Assume this function retrieves user's score
         setA(userScore); // Set A to user's score
-      }, []);
+      }, [currentUser.score]);
+      
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({ ...formData, [name]: value });
+    };
+    const handleEditorChange = (content, editor) => {
+      editorRef.current = editor;
+      setFormData({ ...formData, content: content });
+    };
 
-      const getUserScore = () => {
-        // Simulate getting user's score from backend or any other source
-        // For demonstration purposes, return a static value
-        return 100; // Assume user's score is 100
-      };
+const handleSubmit = () => {
+  if (!formData.title || !/^(?![0-9]*$)[A-Za-z0-9]+$/.test(formData.title)) {
+    setShowNotification(true);
+    setNotiSetting({message: 'Tiêu đề không được bỏ trống, không được gồm toàn số hoặc kí tự đặc biệt!', type: "error"});
+    setFormData({
+      title: '',
+      score: 0,
+      content: '',
+    }
+    );
+    return;
+  }
 
+  // Kiểm tra xem nội dung đã được nhập đúng theo yêu cầu chưa
+  if (!formData.content.trim()) {
+    setShowNotification(true);
+    setNotiSetting({message: 'Nội dung không được bỏ trống!', type: "error"});
+    setFormData({
+      title: '',
+      score: 0,
+      content: '',
+    }
+    );
+    return;
+  }
+
+  // Kiểm tra xem đã chọn các button chưa
+  if (!filterState.DahoHelping || filterState.Others.some(item => item === null)) {
+    setShowNotification(true);
+    setNotiSetting({message: 'Vui lòng chọn đầy đủ thông tin môn học của câu hỏi!', type: "error"});
+    setFormData({
+      title: '',
+      score: 0,
+      content: '',
+    }
+    );
+    return;
+  }
+
+  // Kiểm tra điểm số có lớn hơn 0 và nhỏ hơn hoặc bằng giá trị A
+  if (formData.score <= 0 || formData.score > A) {
+    setShowNotification(true);
+    setNotiSetting({message: `Số điểm phải lớn hơn 0 và nhỏ hơn hoặc bằng ${A}`, type: "error"});
+    setFormData({
+      title: '',
+    }
+    );
+    return;
+  }
+  const new_form = {
+    title: formData.title,
+    score: formData.score,
+    content: formData.content,
+    DahoHelping: (filterState.DahoHelping === null ? '' : filterState.DahoHelping),
+    uni: (filterState.Others[0] === null ? 'bing' : filterState.Others[0]),
+    fal: (filterState.Others[1] === null ? 'bing' : filterState.Others[1]),
+    maj: (filterState.Others[2] === null ? 'bing' : filterState.Others[2]),
+    sub: (filterState.Others[3] === null ? 'bing' : filterState.Others[3]),
+  
+  }
+  if (editorRef.current) {
+    editorRef.current.setContent('');
+  }
+            //gửi API về cho backend
+            setShowNotification(true);
+            setNotiSetting({ message: 'Tạo câu hỏi thành công!', type: 'success' });
+            console.log(formData);
+            setFormData({
+              title: '',
+              score: 0,
+              content: '',
+            }
+            );
+          }
+      
+  // Send the API request to the backend
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-  
-    const handleTitleChange = (e) => {
-      setTitle(e.target.value);
-    };
-    const handleScoreChange = (e) => {
-      setScore(e.target.value);
-    };
-
-    const handleContentChange = (content, editor) => {
-      setContent(content);
-      editorRef.current = editor;
-    };
   
     return (
       <div>
@@ -48,10 +242,10 @@ const CreateQuestionButton = () => {
           </Modal.Header>
           <Modal.Body>
             <Form.Group>
-              <Form.Label for='title'>Tiêu đề câu hỏi</Form.Label>
-              <Form.Control name='title' id='title' type="text" value={title} onChange={handleTitleChange} />
-              <Form.Label for='content'>Nội dung câu hỏi</Form.Label>
-            <Editor id='content' name='content'
+              <Form.Label htmlFor='title'>Tiêu đề câu hỏi</Form.Label>
+              <Form.Control required name='title' id='title' type="text" value={formData.title} onChange={handleInputChange} />
+              <Form.Label htmlFor='content'>Nội dung câu hỏi</Form.Label>
+            <Editor required id='content' name='content'
             onInit={(evt, editor) => (editorRef.current = editor)}
             apiKey='ubvf47mx487okwyj5ynvjw2ruufjrou0oyb6mq4b8tygjopl'
               initialValue=""
@@ -69,30 +263,41 @@ const CreateQuestionButton = () => {
                   alignleft aligncenter alignright alignjustify | \
                   bullist numlist outdent indent | removeformat | help'
               }}
-              onEditorChange={handleContentChange}
+              onEditorChange={handleEditorChange}
             />
+            <Form.Label htmlFor='score'>Số điểm</Form.Label>
+            <Form.Control required name='score' id='score' type="number" value={formData.score} step={10} max={A} onChange={handleInputChange} />
+            <QuesProvider value={{filterState, setFilterState}}>
+            <FilterDropdown/>
+            </QuesProvider>
             </Form.Group>
-            <Form.Label for='score'>Số điểm</Form.Label>
-            <Form.Control name='score' id='score' type="number" value={score} step={10} max={A} onChange={handleScoreChange} />
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
+            <Button type="reset" variant="secondary" onClick={handleClose}>
               Huỷ bỏ
             </Button>
-            <Button variant="primary" onClick={() => {
-              // Add logic to create a new question with title and content
-              // ...
+            <Button type="submit" variant="primary" onClick={() => {
+              handleSubmit();
               handleClose();
             }}>
               Tạo câu hỏi
             </Button>
           </Modal.Footer>
         </Modal>
+        {
+  showNotification === true && (
+    <Notification
+      message={notisetting.message}
+      type={notisetting.type}
+      onClose={() => setShowNotification(false)} // Đặt setShowNotification(false) khi thông báo được đóng
+    />
+  )
+}
       </div>
+
     );
   };
    
-  
   const styles = {
     container: {
       display: 'flex',
@@ -115,5 +320,7 @@ const CreateQuestionButton = () => {
       transition: 'transform 0.3s ease'
     }
   };
+
+
 
   export default CreateQuestionButton;

@@ -6,6 +6,7 @@ import { faCommentDots, faThumbsUp, faThumbsDown, faFlag } from '@fortawesome/fr
 import ReportModal from './ReportModal';
 import { Route, Routes, Link } from 'react-router-dom';
 
+//DTO
 const cards =[
   {
   id: "0",
@@ -43,7 +44,7 @@ function CardTitle({title, award}) {
     return (
         <div className="card-title">
             <h3>{title}</h3>
-            <span className="card-award"><h2>{award}</h2></span>
+            <span className="card-award"><h2>{award}đ</h2></span>
           </div>
     )
 }
@@ -54,7 +55,7 @@ function CardHeader({user, time, subject, uni}) {
             <div className="user"><a href="#">{user}</a></div>
             <div className="time">{time}</div>
             <div className="subject"><a href="#">{subject}</a></div>
-            <div className="uni"> <a href="#">{uni}</a></div>
+            <div className="uni"> <a href={`/gioi-thieu#${uni}`}>{uni}</a></div>
           </div>
     )
 }

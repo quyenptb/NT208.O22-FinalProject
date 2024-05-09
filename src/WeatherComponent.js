@@ -7,13 +7,13 @@ const WeatherComponent = ({city}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const apiKey = '10fda11c88aed7f31a1b8ecc2f4f1947';
+        const apiKey = `${process.env.REACT_APP_OPEN_WEATHER_KEY}`;
         //const city = 'Ho Chi Minh City';
         const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
         const response = await axios.get(url);
         setWeatherData(response.data);
       } catch (error) {
-        console.error('Error fetching weather data:', error);
+        console.error('Đã xảy ra lỗi trong quá trình lấy dữ liệu:', error);
       }
     };
 

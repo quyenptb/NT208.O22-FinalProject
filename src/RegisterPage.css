@@ -35,11 +35,19 @@
     justify-content: center;
     align-items: center;
     margin-right: 30vh;
+    width: 20vh;
+    height: 25vh;
 
 }
 
 .register-logo-1 {
   display: none;
+}
+
+.register-left-container {
+  display: block;
+
+
 }
 
 @media (max-width: 912px) {

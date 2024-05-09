@@ -1,34 +1,43 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState, useRef, createContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './RegisterPage.css';
 import daho from './icons/DahoHelping1.png'
+import * as img from './images';
+import { UniProvider } from './App';
+import { uniContext } from './App';
+import axios from 'axios';
+import Notification from './Notification';
 
-const universities = [
-  "Đại học Bách Khoa",
-  "Đại học Khoa học tự nhiên",
-  "Đại học Khoa học xã hội và Nhân văn",
-  "Đại học Quốc Tế"
-];
+import uni_data from './data/university.json';
+import maj_data from './data/major.json';
+import fal_data from './data/faculty.json';
 
-const faculty = [
-  "Khoa Công nghệ thông tin",
-  "Khoa Vật lý",
-  "Khoa Hóa học",
-  // Thêm các khoa khác tương ứng
-];
+const fal = fal_data;
+const maj = maj_data;
+const uni = uni_data;
 
-const majors = [
-  "Ngành Kỹ thuật máy tính",
-  "Ngành Vật lý học",
-  "Ngành Hóa học",
-  // Thêm các ngành khác tương ứng
-];
+const createUser = async (userData) => {
+  try {
+    const response = await axios.post('http://example.com/api/users', userData);
 
-const hobbies = [
-  "Đọc sách",
-  "Lập trình",
-  "Thể thao",
-  // Thêm sở thích khác
-];
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      throw new Error('Failed to create user: Invalid response from server');
+    }
+  } catch (error) {
+    if (error.response && error.response.status === 409) {
+      // Xử lý tình huống tên tài khoản bị trùng
+      console.error('Username already exists:', error.response.data.message);
+      throw new Error('Tên tài khoản đã tồn tại. Vui lòng chọn tên khác.');
+    } else {
+      // Xử lý các lỗi khác
+      console.error('Error creating user:', error);
+      throw error;
+    }
+  }
+};
+
 
 const hometown = [
   "An Giang", "Bà Rịa - Vũng Tàu", "Bắc Giang", "Bắc Kạn", "Bạc Liêu", "Bắc Ninh",
@@ -43,21 +52,72 @@ const hometown = [
   "Hà Nội", "TP HCM"
 ];
 
+const UserContext = createContext();
+
+const UserPage = () => {
+
+  const { userDetails, setUserDetails } = useContext(UserContext);
+
+  const [isEditing, setIsEditing] = useState(false);
+
+  return (
+    <div className="user-page">
+        <>
+          <div className="user-header">
+          <img src={userDetails.avatar} alt={userDetails.username} className="avatar" />
+            <h1>
+                <img src={userDetails.uni_id} alt={userDetails.uni_id} className='user-uni' />
+                {userDetails.fullName}
+            </h1>
+                <p><i> {`@${userDetails.username}`}</i></p>
+            <p>{userDetails.email}</p>
+            <p>Khoa {userDetails.fal_id}, ngành {userDetails.maj_id}</p>
+          </div>
+          <div className="user-details">
+            <h2>Thông tin cá nhân</h2>
+            <p>Điểm DahoHelping: 20 điểm </p> <span>Tặng người dùng mới</span>
+            <p>Email: {userDetails.email}</p>
+            <p>Quê quán: {userDetails.hometown}</p> {/*hometown*/}
+            <p>Sở thích: {userDetails.hobby}</p>
+          </div>
+        </>
+        </div>
+  );
+};
 
 const RegisterPage = () => {
+  const nativate = useNavigate();
+  const [notisetting, setNotiSetting] = useState([]);
+  const [showNotification, setShowNotification] = useState(false);
   const [userDetails, setUserDetails] = useState({
-    firstName: '',
-    lastName: '',
+    fullName: '',
     username: '',
     password: '',
     email: '',
     hometown: '',
-    university: '',
-    faculty: '',
-    major: '',
-    hobbies: '',
-    bio: ''
+    uni_id: '',
+    fal_id: '',
+    maj_id: '',
+    hobby: '',
+    bio: '',
+    avatar: '',
   });
+  const [imageSrc, setImageSrc] = useState('');
+  const UserProvider = UserContext.Provider;
+  const handleImageUpload = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImageSrc(reader.result);
+        setUserDetails(prevDetails => ({
+          ...prevDetails,
+          avatar: reader.result
+        }))
+      };
+      reader.readAsDataURL(file);
+        }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -67,44 +127,75 @@ const RegisterPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Thêm logic để kiểm tra username và password
-    console.log(userDetails);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const newUser = await createUser(userDetails);
+      setShowNotification(true);
+      setNotiSetting({ message: 'Đăng ký người dùng thanh công! Xin hãy đăng nhập.', type: 'success' });
+      setUserDetails({ fullName: '', username: '', password: '', email: '', hometown: '', uni_id: '', fal_id: '', maj_id: '', hobby: '', bio: '', avatar: '' });
+      setImageSrc('');
+      nativate('/dang-nhap');
+      //console.log('User created successfully:', newUser);
+      // Xử lý thành công, có thể điều hướng người dùng đến trang khác hoặc hiển thị thông báo
+    } catch (error) {
+      // Xử lý lỗi khi tạo người dùng
+      setShowNotification(true);
+      setNotiSetting({ message: 'Lỗi khi tạo người dùng! ' + error, type: 'error' });
+      //console.error('Error creating user:', error);
+    }
   };
 
   return (
+    <UserProvider value={{userDetails, setUserDetails}}>
     <>
     <img className='register-logo-1' src= {daho} alt='Logo' />
-    
     <div className="register-container">
-      <img className='register-logo' src= {daho} alt='Logo' />
+      <div className='register-left-container'>
+      <UserPage>
+ </UserPage>
+ </div>
       <form className="register-form" onSubmit={handleSubmit}>
-        <input type="text" name="lastName" id='lastName' placeholder="Họ" onChange={handleChange} />
-        <input type="text" name="firstName" placeholder="Tên" onChange={handleChange} />
-        <input type="text" name="username" placeholder="Tên tài khoản" onChange={handleChange} />
-        <input type="password" name="password" placeholder="Mật khẩu" onChange={handleChange} />
-        <input type="email" name="email" placeholder="Email" onChange={handleChange} />
-        <select name="hometown" onChange={handleChange}>
+        <input type="text" name="fullName" placeholder="Họ và tên" onChange={handleChange} required />
+        <input type="text" name="username" placeholder="Tên tài khoản" onChange={handleChange} required />
+        <input type="password" name="password" placeholder="Mật khẩu" onChange={handleChange} required />
+        <input type="email" name="email" placeholder="Email" onChange={handleChange} required />
+        <select name="hometown" onChange={handleChange} required >
           {hometown.map(home => <option key={home} value={home}>{home}</option>)}
         </select>
-        <select name="university" onChange={handleChange}>
-          {universities.map(uni => <option key={uni} value={uni}>{uni}</option>)}
+        <select name="uni_id" onChange={handleChange} required >
+        {uni.map(({id, name}) => <option key={id} value={id}>{name}</option>)}
         </select>
-        <select name="faculty" onChange={handleChange}>
-          {faculty.map(fac => <option key={fac} value={fac}>{fac}</option>)}
+        <select name="fal_id" onChange={handleChange} required >
+          {fal.map(({id, name}) => <option key={id} value={id}>{name}</option>)}
         </select>
-        <select name="major" onChange={handleChange}>
-          {majors.map(maj => <option key={maj} value={maj}>{maj}</option>)}
+        <select name="maj_id" onChange={handleChange} required>
+          {maj.map(({id, name}) => <option key={id} value={id}>{name}</option>)}
         </select>
-        <select name="hobbies" onChange={handleChange}>
-          {hobbies.map(hobby => <option key={hobby} value={hobby}>{hobby}</option>)}
-        </select>
-        <textarea name="bio" placeholder="Giới thiệu bản thân" onChange={handleChange}></textarea>
+        <input type="text" name="hobby" placeholder="Sở thích" onChange={handleChange} required />
+        <textarea value={userDetails.bio} name="bio" placeholder="Giới thiệu bản thân" onChange={handleChange}></textarea>
+        <input type="file" onChange={handleImageUpload} />
+      {imageSrc && (
+        <div>
+          <p>Ảnh đại diện:</p>
+          <img src={imageSrc} alt="Ảnh đại diện" style={{ maxWidth: '100%' }} />
+        </div>
+      )}
         <button type="submit">Đăng kí</button>
       </form>
+      
     </div>
+    {
+  showNotification === true && (
+    <Notification
+      message={notisetting.message}
+      type={notisetting.type}
+      onClose={() => setShowNotification(false)} // Đặt setShowNotification(false) khi thông báo được đóng
+    />
+  )
+}
     </>
+    </UserProvider>
   );
 };
 

@@ -2,8 +2,34 @@
 import React, { useState } from 'react';
 import './LoginPage.css'
 import daho from './icons/DahoHelping1.png'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Notification from './Notification';
+
+const loginUser = async (userData) => {
+  try {
+    // Gửi yêu cầu POST đến backend để đăng nhập
+    const response = await axios.post('http://example.com/api/login', userData);
+
+    // Kiểm tra mã trạng thái của phản hồi từ backend
+    if (response.status === 200) {
+      // Nếu đăng nhập thành công, trả về dữ liệu từ backend (ví dụ: thông tin người dùng)
+      return response.data;
+    } else {
+      // Nếu có lỗi khi đăng nhập, in ra console và ném ra một ngoại lệ để xử lý
+      throw new Error('Failed to login: Invalid response from server');
+    }
+  } catch (error) {
+    // Xử lý lỗi khi có lỗi xảy ra trong quá trình gửi yêu cầu hoặc nhận phản hồi từ backend
+    console.error('Error logging in:', error);
+    throw error;
+  }
+};
 
 const LoginPage = () => {
+  const [notisetting, setNotiSetting] = useState([]);
+  const [showNotification, setShowNotification] = useState(false);
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -18,9 +44,22 @@ const [usernameError, setUsernameError] = useState('')
     setFormData({ ...formData, [name]: newValue });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add login logic here
+    try {
+      const loggedInUser = await loginUser(formData);
+      console.log('User logged in successfully:', loggedInUser);
+      setShowNotification(true);
+      setNotiSetting({ message: 'Đăng nhập thành công! Đang chuyển trang ...', type: 'success' });
+      navigate('/trang-chu');
+      // Điều hướng người dùng đến trang khác hoặc thực hiện các thao tác khác sau khi đăng nhập thành công
+    } catch (error) {
+      // Xử lý lỗi khi đăng nhập không thành công
+      console.error('Error logging in:', error);
+      setShowNotification(true);
+      setNotiSetting({ message: 'Đăng nhập không thành công! Gặp lỗi ' + error, type: 'error' });
+      // Hiển thị thông báo lỗi cho người dùng, ví dụ: setUsernameError('Đăng nhập không thành công. Vui lòng thử lại.');
+    }
   };
 
   const onButtonClick = () => {
@@ -48,23 +87,7 @@ const [usernameError, setUsernameError] = useState('')
       setPasswordError('Mật khẩu phải có độ dài tối thiểu 8 kí tự')
       return
     }
-  
-    // Example about  Authentication calls will be made here...
-    /*
-    checkAccountExists((accountExists) => {
-      // If yes, log in
-      if (accountExists) logIn()
-      // Else, ask user if they want to create a new account and if yes, then log in
-      else if (
-        window.confirm(
-          'Tài khoản không tồn tại. Bạn có muốn tạo tài khoản mới không?'
-        )
-      ) {
-        logIn()
-      }
-    }) */
   }
-
   return (
     
      <div className='login-container'> 
@@ -103,6 +126,15 @@ const [usernameError, setUsernameError] = useState('')
           <button type="submit" className='login-button' onClick={onButtonClick}>Đăng nhập</button>
         </form>
       </div>
+      {
+  showNotification === true && (
+    <Notification
+      message={notisetting.message}
+      type={notisetting.type}
+      onClose={() => setShowNotification(false)} // Đặt setShowNotification(false) khi thông báo được đóng
+    />
+  )
+}
     </div>
   );
 };

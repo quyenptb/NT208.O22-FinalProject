@@ -7,10 +7,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalculator, faPlusMinus, faCode, faComputer, faBook, faMicrochip, faLanguage, faCommentDots, faThumbsUp, faThumbsDown, faFlag, faBucket } from '@fortawesome/free-solid-svg-icons';
 import { Editor } from '@tinymce/tinymce-react'; //Thư viện TinyMCE giúp tạo ô text có định dạng
+import { useDispatch} from 'react-redux';
 
+import uni_data from './data/university.json';
+import maj_data from './data/major.json';
+import fal_data from './data/faculty.json';
+import sub_data from './data/subject.json';
+import daho_data from './data/dahohelping.json';
 
 import { useNavigate } from 'react-router-dom';
-import * as img from './images';
+import * as img from './images.js';
 
 import banner from './CarouselImage/dahohelping-banner.png'
 import account from './icons/account.png'
@@ -40,10 +46,10 @@ import lsvmtg from './icons/lsvmtg.jpg'
 import ppnckh from './icons/ppnckh.jpg'
 import tkckhxh from './icons/tkckhxh.png'
 
+import bku1 from './CarouselImage/bku1.png'
 
 import avatar from './icons/minhhieu.webp'
 import avatar1 from './icons/dieuhuyen.jpeg'
-
 
 import Card from './Card';
 import IntroductionContent from './IntroductionContent';
@@ -58,6 +64,8 @@ import Notification from './Notification.js';
 import UserPage from './UserPage.js';
 import CreateQuestionButton from './CreateQuestionButton.js';
 import context from 'react-bootstrap/esm/AccordionContext.js';
+import FilterDropdown from './FilterDropDown.js';
+import { iconName } from '@fortawesome/free-brands-svg-icons/faAffiliatetheme';
 
  {/*Dataset Giả */}
  const user = [
@@ -66,7 +74,7 @@ import context from 'react-bootstrap/esm/AccordionContext.js';
       username: 'hieuthuhai',
       avatar: avatar,
       fullname: "Trần Minh Hiếu",
-      uni_id: '1',
+      uni_id: bku,
       fal_id: "Khoa học máy tính",
       maj_id: "Khoa học máy tính",
       email: "minhhieutran@gmail.com",
@@ -79,9 +87,9 @@ import context from 'react-bootstrap/esm/AccordionContext.js';
     username: 'dieuhuyen098',
     avatar: avatar1,
     fullname: "Nguyễn Diệu Huyền",
-    uni_id: '3', //khóa ngoại trỏ đến để lấy dữ liệu từ bảng Uni
-    fal_id: "Nhật Bản học", 
-    maj_id: "Nhật Bản học",
+    uni_id: 3, //khóa ngoại trỏ đến để lấy dữ liệu từ bảng Uni
+    fal_id: "Khoa Nhật Bản học", 
+    maj_id: "Ngành Nhật Bản học",
     email: "shijukukaizen@gmail.com",
     hometown: "Tuyên Quang",
     score: 450,
@@ -89,84 +97,77 @@ import context from 'react-bootstrap/esm/AccordionContext.js';
 }
 
 ]
-const faculty = [
+const cards =[
   {
-    id: "1", name: "Khoa học máy tính"
-  },
-  {
-    id: "2", name: "Công nghệ phần mềm"
-  },
-  {
-    id: "3", name: "Hệ thống thông tin"
-  },
-  {
-    id: "4", name: "Công nghệ thông tin"
-  },
-  {
-    id: "5", name: "Mạng máy tính và truyền thông"
-  },
-  {
-    id: "6", name: "Kỹ thuật máy tính"
-  },
-  {
-    id: "7", name: "Khoa học và kỹ thuật thông tin"
-  },
+  card_id: "0",
+  title:"Giúp mình giải bài này với ạ mọi người ới!!!",
+  award:"20đ",
+  user:"Mỹ Dung", 
+  time:"1 phút trước", 
+  sub_id:"Tiếng Nhật 1", 
+  text: "When you nest content inside a JSX tag, the parent component will receive that content in a prop called children"
+}, 
+{
+  card_id: 1,
+  sub_id: 4,
+  user_id: 3, 
+  daho_id: 0,
+  title: "Giúp mình giải bài này với ạ mọi người ới!!!", 
+  award: 50,
+  created_date: '1989-07-98',
+  time: '', 
+  text: "When you nest content inside a JSX tag, the parent component will receive that content in a prop called children",
+  img: '',
+  is_reported: false,
+  is_answered: false
+},
+{
+  card_id: "2",
+  title:"Giúp mình giải bài này với ạ mọi người ới!!!",
+  award:50,
+  user_id:"Trần Minh", 
+  time:"1 phút trước", 
+  sub_id:"Tiếng Nhật 1",
+  text: "When you nest content inside a JSX tag, the parent component will receive that content in a prop called children"
+}
 ]
-const dahohelping = [
+const ranking = [
   {
-    id: "1", name: "Học tập"
-  },
-  {
-    id: "2", name: "Công việc"
-  },
-  {
-    id: "3", name: "Bạn bè"
-  },
-  {
-    id: "4", name: "Gia đình"
-  },
-  {
-    id: "5", name: "Tình cảm"
-  },
-  {
-    id: "6", name: "Tâm sự"
-  },
-  {
-    id: "7", name: "Góp ý"
-  }
+    id: 1,
+    name: "Trần Ngọc Minh Thi",
+    uni: ptnk,
+    score: "900"
+},
+{
+  id: "2",
+  name: "Phạm Hải Anh",
+  uni: khtn,
+  score: "800"
+},
+
+{
+  id: "3",
+  name: "Hà Ngọc Hân",
+  uni: ussh,
+  score: "720"
+},
+
+{
+  id: "4",
+  name: "Nguyễn Thành Đạt",
+  uni: uit,
+  score: "700"
+},
+
+{
+  id: "5",
+  name: "Lưu Bình Minh",
+  uni: uel,
+  score: "690"
+}
 ]
-const courses = [
-  {
-    id: '1', name: 'Hệ quản trị cơ sở dữ liệu'
-  },
-  {
-    id: '2', name: 'Phân tích thiết kế hệ thống thông tin'
-  },
-  {
-    id: '3', name: 'Mạng xã hội'
-  },
-  {
-    id: '4', name: 'Hệ hỗ trợ quyết định'
-  },
-  {
-    id: '5', name: 'Phát triển ứng dụng trên thiết bị di động'
-  },
-  {
-    id: '6', name: 'Quản lí dự án công nghệ thông tin'
-  }
-]
-const major = [
-  { id: '1', name: "Khoa học máy tính" },
-  { id: '2', name: "Kỹ thuật phần mềm" },
-  { id: '3', name: "Kỹ thuật máy tính" },
-  { id: '4', name: "Hệ thống thông tin" },
-  { id: '5', name: "Thương mại điện tử" },
-  { id: '6', name: "Mạng máy tính và truyền thông" },
-  { id: '7', name: "An toàn thông tin" },
-  { id: '8', name: "Trí tuệ nhân tạo" },
-  { id: '9', name: "Khoa học dữ liệu" }
-]
-const university = [
+
+const _university = [
   {
     id: "1",
     name: "Trường Đại học Bách Khoa",
@@ -267,79 +268,18 @@ const university = [
     src: [img.thsp1, img.thsp2, img.thsp3]
   }
 ]
-const cards =[
-  {
-  id: "0",
-  title:"Giúp mình giải bài này với ạ mọi người ới!!!",
-  award:"20đ",
-  user:"Mỹ Dung", 
-  time:"1 phút trước", 
-  subject:"Tiếng Nhật 1",
-  uni:"USSH", 
-  text: "When you nest content inside a JSX tag, the parent component will receive that content in a prop called children"
-}, 
-{
-  id: "1",
-  title:"Giúp mình giải bài này với ạ mọi người ới!!! Mình cảm ơn nhiều lắm ạ.",
-  award:"50đ",
-  user:"Ngọc Mỹ", 
-  time:"1 phút trước", 
-  subject:"Tiếng Nhật 1",
-  uni:"USSH", 
-  text: "When you nest content inside a JSX tag, the parent component will receive that content in a prop called children"
-},
-{
-  id: "2",
-  title:"Giúp mình giải bài này với ạ mọi người ới!!!",
-  award:"50đ",
-  user:"Trần Minh", 
-  time:"1 phút trước", 
-  subject:"Tiếng Nhật 1",
-  uni:"USSH", 
-  text: "When you nest content inside a JSX tag, the parent component will receive that content in a prop called children"
-}
-]
-const ranking = [
-  {
-    id: 1,
-    name: "Trần Ngọc Minh Thi",
-    uni: ptnk,
-    score: "900"
-},
-{
-  id: "2",
-  name: "Phạm Hải Anh",
-  uni: khtn,
-  score: "800"
-},
 
-{
-  id: "3",
-  name: "Hà Ngọc Hân",
-  uni: ussh,
-  score: "720"
-},
-
-{
-  id: "4",
-  name: "Nguyễn Thành Đạt",
-  uni: uit,
-  score: "700"
-},
-
-{
-  id: "5",
-  name: "Lưu Bình Minh",
-  uni: uel,
-  score: "690"
-}
-]
+const faculty = fal_data;
+const major = maj_data;
+const university = uni_data;
+const dahohelping = daho_data
+const subject = sub_data;
 
 function Rotation({userName}) {
   return (
     <div className="outer-heading" style={{fontFamily: 'sans-serif'}}>
         <WeatherComponent city={'Ho Chi Minh City'}/>
-        <WeatherComponent city={'Quy Nhon'}/>
+        <WeatherComponent city={'Long Xuyen, VN'}/>
             <h1>
                 Meow meow meow, {userName} trả lại <div className="inner-headings">
                     <span className="doRotate">
@@ -404,13 +344,13 @@ function NavBar() {
 }
 
 function Sidebar() {
-  const { uni, setUni, subjects, setSubjects } = useContext(uniContext);
+  const {sub} = useContext(uniContext);
   return (
     <nav className="col-2 col-md-3 col-lg-2 d-md-block bg-light d-sm-none sidebar">
       <div className="sidebar-sticky">
         <ul className="nav flex-column">
-        {subjects.subjects.map(({ key, icon, label, illust, desc }) => (
-            <NavItem icon={icon} label={label} key={key} illust={illust} desc={desc} />
+        {sub.map(({ id, icon, name, illust, desc }) => (
+            <NavItem icon={icon} label={name} key={id} illust={illust} desc={desc} />
           ))}
         </ul>
       </div>
@@ -455,6 +395,7 @@ function NavItem({ icon, label, illust, desc }) {
   );
 }
 
+/*
 function DropDownCustom({toggle, listItems, setUni}) 
 {
   const [value, setValue] = useState(toggle)
@@ -476,9 +417,10 @@ function DropDownCustom({toggle, listItems, setUni})
       ))}
     </DropdownButton>
   )
-}
+} 
 
-function FilterDropdown({ setUni }) {
+function FilterDropdown() {
+  const {setUni} = useContext(uniContext);
   const [uniActived, setUniActived] = useState();
   const [fac, setFac] = useState(["Khoa"]);
   const [maj, setMaj] = useState(["Ngành"]);
@@ -534,15 +476,15 @@ function FilterDropdown({ setUni }) {
       </div>
     </>
   );
-}
+} */
 
 
 function GroupCard({ cards }) {
   return (
     <>
       {cards.map((card) => (
-      <Link key={card.id} to={`/tra-loi/${card.id}`} state={{ card }}>
-       <Card key={card.id} {...card} />
+      <Link key={card.card_id} to={`/tra-loi/${card.card_id}`} state={{ card }}>
+       <Card key={card.card_id} {...card} />
      </Link>
       ))}
     </>
@@ -653,116 +595,109 @@ function Footer() {
   );
 }
 
-const subjects_uit = {
-  id: 5,
-    subjects: [
-    {
-        key: 1,
+const subjects_uit = [
+     {
+        id: 1,
         icon: faPlusMinus,
-        label: "Giải tích",
+        name: "Giải tích",
         illust: giaitich,
         desc: "Môn Giải tích là môn học ở giai đoạn kiến thức đại cương, là môn học bắt buộc đối với tất cả sinh viên. Môn học này giúp cho SV có kiến thức cơ bản về phép tính vi phân hàm nhiều biến; phép tính tích phân hàm nhiều biến (tích phân bội); tích phân đường, tích phân mặt; cũng như là kỹ năng khảo sát chuỗi số, chuỗi hàm, tích phân suy rộng,…cùng với việc nhận dạng và giải quyết một số phương trình vi phân cấp một, cấp cao,…để từ đó SV có thể tiếp tục học tập những môn chuyên ngành, hay phục vụ cho quá trình làm khóa luận tốt nghiệp"
       },
       {
-        key: 2,
+        id: 2,
         icon: faCode,
-        label: "Nhập môn lập trình",
+        name: "Nhập môn lập trình",
         illust: nmlt,
         desc: "Môn học sẽ cung cấp các kiến thức nền tảng về máy tính, tư duy và các kỹ năng căn bản lập trình cho tất cả sinh viên các ngành Công nghệ thông tin. Đối với hệ tài năng: sinh viên sẽ được trang bị các kiến thức nâng cao về tư duy và các kỹ năng lập trình thông qua một số bài toán có độ phức tạp cao."
       },
       {
-        key: 3,
+        id: 3,
         icon: faComputer,
-        label: "Tổ chức và cấu trúc máy tính",
+        name: "Tổ chức và cấu trúc máy tính",
         illust: nmlt,
         desc: "Môn học sẽ cung cấp các kiến thức nền tảng về máy tính, tư duy và các kỹ năng căn bản lập trình cho tất cả sinh viên các ngành Công nghệ thông tin. Đối với hệ tài năng: sinh viên sẽ được trang bị các kiến thức nâng cao về tư duy và các kỹ năng lập trình thông qua một số bài toán có độ phức tạp cao."
       },
       {
-        key: 4,
+        id: 4,
         icon: faBook,
-        label: "Triết học Mac Lenin",
+        name: "Triết học Mac Lenin",
         illust: nmlt,
         desc: "Môn học sẽ cung cấp các kiến thức nền tảng về máy tính, tư duy và các kỹ năng căn bản lập trình cho tất cả sinh viên các ngành Công nghệ thông tin. Đối với hệ tài năng: sinh viên sẽ được trang bị các kiến thức nâng cao về tư duy và các kỹ năng lập trình thông qua một số bài toán có độ phức tạp cao."
       },
       {
-        key: 5,
+        id: 5,
         icon: faMicrochip,
-        label: "Nhập môn mạch số",
+        name: "Nhập môn mạch số",
         illust: nmlt,
         desc: "Môn học sẽ cung cấp các kiến thức nền tảng về máy tính, tư duy và các kỹ năng căn bản lập trình cho tất cả sinh viên các ngành Công nghệ thông tin. Đối với hệ tài năng: sinh viên sẽ được trang bị các kiến thức nâng cao về tư duy và các kỹ năng lập trình thông qua một số bài toán có độ phức tạp cao."
       },
       {
-        key: 6,
+        id: 6,
         icon: faLanguage,
-        label: "Tiếng Nhật 1",
+        name: "Tiếng Nhật 1",
         illust: tiengnhat, //illustration
         desc: "Môn học cung cấp cho sinh viên các kiến thức về tiếng Nhật sơ cấp: làm quen với hệ chữ khác hệ chữ La Tinh, ngữ pháp (ngữ pháp tiếng Nhật sơ cấp; các thì, thể của động từ; trợ từ, giới từ; lượng từ vựng tương ứng), phát âm,… các kỹ năng nghe, nói, đọc, viết sơ cấp." //description
-      }]
-    }; //
-const subjects_ussh = {
-      id: 3,
-        subjects: [
-        {
-            key: 1,
+      }
+    ]
+
+const subjects_ussh = [
+    {
+            id: 1,
             icon: faPlusMinus,
-            label: "Thống kê cho khoa học xã hội",
+            name: "Thống kê cho khoa học xã hội",
             illust: tkckhxh,
             desc: "Môn Giải tích là môn học ở giai đoạn kiến thức đại cương, là môn học bắt buộc đối với tất cả sinh viên. Môn học này giúp cho SV có kiến thức cơ bản về phép tính vi phân hàm nhiều biến; phép tính tích phân hàm nhiều biến (tích phân bội); tích phân đường, tích phân mặt; cũng như là kỹ năng khảo sát chuỗi số, chuỗi hàm, tích phân suy rộng,…cùng với việc nhận dạng và giải quyết một số phương trình vi phân cấp một, cấp cao,…để từ đó SV có thể tiếp tục học tập những môn chuyên ngành, hay phục vụ cho quá trình làm khóa luận tốt nghiệp"
           },
           {
-            key: 2,
+            id: 2,
             icon: faCode,
-            label: "Cơ sở văn hoá Việt Nam",
+            name: "Cơ sở văn hoá Việt Nam",
             illust: csvhvn,
             desc: "Môn học sẽ cung cấp các kiến thức nền tảng về máy tính, tư duy và các kỹ năng căn bản lập trình cho tất cả sinh viên các ngành Công nghệ thông tin. Đối với hệ tài năng: sinh viên sẽ được trang bị các kiến thức nâng cao về tư duy và các kỹ năng lập trình thông qua một số bài toán có độ phức tạp cao."
           },
           {
-            key: 3,
+            id: 3,
             icon: faComputer,
-            label: "Lịch sử văn minh thế giới",
+            name: "Lịch sử văn minh thế giới",
             illust: lsvmtg,
             desc: "Môn học sẽ cung cấp các kiến thức nền tảng về máy tính, tư duy và các kỹ năng căn bản lập trình cho tất cả sinh viên các ngành Công nghệ thông tin. Đối với hệ tài năng: sinh viên sẽ được trang bị các kiến thức nâng cao về tư duy và các kỹ năng lập trình thông qua một số bài toán có độ phức tạp cao."
           },
           {
-            key: 4,
+            id: 4,
             icon: faBook,
-            label: "Dẫn luận ngôn ngữ học",
+            name: "Dẫn luận ngôn ngữ học",
             illust: dlnnh,
             desc: "Môn học sẽ cung cấp các kiến thức nền tảng về máy tính, tư duy và các kỹ năng căn bản lập trình cho tất cả sinh viên các ngành Công nghệ thông tin. Đối với hệ tài năng: sinh viên sẽ được trang bị các kiến thức nâng cao về tư duy và các kỹ năng lập trình thông qua một số bài toán có độ phức tạp cao."
           },
           {
-            key: 5,
+            id: 5,
             icon: faMicrochip,
-            label: "Phương pháp nghiên cứu khoa học",
+            name: "Phương pháp nghiên cứu khoa học",
             illust: ppnckh,
             desc: "Môn học sẽ cung cấp các kiến thức nền tảng về máy tính, tư duy và các kỹ năng căn bản lập trình cho tất cả sinh viên các ngành Công nghệ thông tin. Đối với hệ tài năng: sinh viên sẽ được trang bị các kiến thức nâng cao về tư duy và các kỹ năng lập trình thông qua một số bài toán có độ phức tạp cao."
           },
           {
-            key: 6,
+            id: 6,
             icon: faLanguage,
-            label: "Giáo dục thể chất 1",
+            name: "Giáo dục thể chất 1",
             illust: gdtc1, //illustration
             desc: "Môn học cung cấp cho sinh viên các kiến thức về tiếng Nhật sơ cấp: làm quen với hệ chữ khác hệ chữ La Tinh, ngữ pháp (ngữ pháp tiếng Nhật sơ cấp; các thì, thể của động từ; trợ từ, giới từ; lượng từ vựng tương ứng), phát âm,… các kỹ năng nghe, nói, đọc, viết sơ cấp." //description
-          }]
-};
+          }
+        ]
   //add thêm props vào do chưa học context
  
   function HomePage() {
 
-    const { uni, setUni, subjects, setSubjects } = useContext(uniContext);
+    const [filterData, setFilterData] = useState([]);
+    const {dahoHelping, setDahoHelping, currentUser, setCurrentUser, choosenUni, setChoosenUni, choosenFal, setChoosenFal, choosenSub, setChoosenSub, fal, setFal, maj, setMaj, uni, setUni, sub, setSub} = useContext(uniContext);
 
-    /*
-    const [uni, setUni] = useState("Trường Đại học");
-    const [subjects, setSubjects] = useState(subjects_uit); 
-    */ 
-    
     useEffect(() => {
-      if (uni === "Trường Đại học") {
-        setSubjects(subjects_uit);
+      if (choosenUni === "Trường Đại học") {
+        setSub(subjects_uit);
       } else {
-        setSubjects(subjects_ussh);
+        setSub(subjects_ussh);
       }
-    }, [uni]);
+    }, [choosenUni]);
 
     return (
       <div>
@@ -772,7 +707,7 @@ const subjects_ussh = {
             <Sidebar className="sidebar" />
             <div className="little-main">
             <CreateQuestionButton />
-            <FilterDropdown className="filter-dropdown" setUni={setUni} />
+            <FilterDropdown className="filter-dropdown" setFilterData={setFilterData}/>
             <GroupCard cards={cards} />
             </div>
             <div className="right">
@@ -788,7 +723,7 @@ const subjects_ussh = {
   function AnsweringPage() {
 
     const { slug } = useParams();
-    const card = cards.find((card) => card.id === slug);
+    const card = cards.find((card) => card.card_id === slug);
 
     return (
       <div>
@@ -807,6 +742,7 @@ const subjects_ussh = {
             </div>
 
             </div>
+            <Footer />   
             </div>
     )
   }
@@ -815,7 +751,8 @@ const subjects_ussh = {
     return (
       <div>
       <NavBar/>
-      <IntroductionContent university={university} />
+      <IntroductionContent university={_university} />
+      <Footer />   
             </div>
     )
   }
@@ -837,6 +774,7 @@ const subjects_ussh = {
             </div>
 
             </div>
+            <Footer />   
             </div>
     )
   }
@@ -854,7 +792,8 @@ const subjects_ussh = {
               <BulletinCard />
               <RankingTable ranking={ranking} />
             </div> 
-            </div>       
+            </div>    
+            <Footer />   
       </>
     )
   }
@@ -862,6 +801,7 @@ const subjects_ussh = {
 function MyUserPage() {
   const { username } = useParams();
   const user_example = user.find((user) => user.username === username);
+  console.log(user_example)
 
   return (
     <div>
@@ -877,25 +817,46 @@ function MyUserPage() {
             <RankingTable ranking={ranking} />
           </div>
           </div>
+          <Footer />   
           </div>
   )
 }
 
-const uniContext = createContext();
+export const uniContext = createContext();
+export const UniProvider = uniContext.Provider;
+export const UniConsumer = uniContext.Consumer;
+
 function App() {
-  const [uni, setUni] = useState("Trường Đại học");
-    const [subjects, setSubjects] = useState(subjects_uit);  
+  const testURL = './CarouselImage/thsp3.jpg';
+  const [notisetting, setNotiSetting] = useState([]);
+  const [showNotification, setShowNotification] = useState(false); // Thêm state để kiểm soát hiển thị thông báo
+  const [filterState, setFilterState] = useState({
+    DahoHelping: "DahoHelping",
+    Others: [null, null, null, null] //trường, ngành, khoa, môn
+  })
+    const [currentUser, setCurrentUser] = useState(user[0]);
+    const [cards, setCards] = useState([]);
+    const [dahoHelping, setDahoHelping] = useState(dahohelping);
+    const [choosenUni, setChoosenUni] = useState("Trường Đại học");
+    const [uni, setUni] = useState(university);
+    const [fal, setFal]  = useState(faculty.filter((fal) => {
+      return fal.uni_id === 3;
+    }));
+    const [choosenFal, setChoosenFal] = useState("Khoa");
+    const [maj, setMaj] = useState(major);
+    const [sub, setSub] = useState(subject);
+    const [choosenSub, setChoosenSub] = useState("Môn học");
 
     useEffect(() => {
-      if (uni === "Trường Đại học") {
-        setSubjects(subjects_uit);
+      if (choosenUni === "Trường Đại học") {
+        setSub(subjects_uit);
       } else {
-        setSubjects(subjects_ussh);
+        setSub(subjects_ussh);
       }
-    }, [uni]);
+    }, [choosenUni]);
 
 return (
-  <uniContext.Provider value={{uni, setUni, subjects, setSubjects}} >
+  <UniProvider value={{testURL, setNotiSetting, setShowNotification, filterState, setFilterState, dahoHelping, setDahoHelping, currentUser, setCurrentUser, choosenUni, setChoosenUni, choosenFal, setChoosenFal, choosenSub, setChoosenSub, fal, setFal, maj, setMaj, uni, setUni, sub, setSub}} >
     <Routes>
         <Route path='/trang-chu' element={<HomePage/> }/>
 
@@ -915,8 +876,9 @@ return (
 
         <Route path='/nguoi-dung/:username' element={<MyUserPage />} />
 
+
     </Routes>
-    </uniContext.Provider>
+    </UniProvider>
 );
 }
 
