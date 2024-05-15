@@ -3,15 +3,15 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom'
 import './index.css';
 import App from './App';
-import {Provider} from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
+import { AppProvider } from './context/AppContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <AppProvider>
     <Router>
     <App />
     </Router>
+    </AppProvider>
   </React.StrictMode>
 );
