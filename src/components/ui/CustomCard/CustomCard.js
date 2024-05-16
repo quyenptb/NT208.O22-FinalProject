@@ -4,8 +4,9 @@ import { Editor } from '@tinymce/tinymce-react';
 import awardPic from '../../../assets/icons/award.png';
 import ReportModal from '../ReportModal/ReportModal';
 import { getUserById } from 'src/services/UsersService';
-import {user_data, card_data,   daho_data, fal_data, maj_data, sub_data, uni_data} from 'src/data/index'
+import {fal_data, maj_data, sub_data, uni_data} from 'src/data/index'
 import { Link } from 'react-router-dom';
+import { AppContext } from 'src/context';
 
 const CustomCard = ({ card }) => {
   const editorRef = useRef(null);
@@ -15,9 +16,9 @@ const CustomCard = ({ card }) => {
   const [isReportSubmitted, setIsReportSubmitted] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const [cardUser, setCardUser] = useState([]);
-  
 
- 
+  const {currentUser} = useContext(AppContext);
+  
   useEffect(() => {
     async function fetchUser() {
       try {
@@ -39,9 +40,6 @@ const CustomCard = ({ card }) => {
   const cardMaj = maj_data.find(m => m.maj_id === cardSub.maj_id); 
   const cardFal = fal_data.find(f => f.fal_id === cardMaj.fal_id); 
   const cardUni = uni_data.find(u => u.id === cardFal.uni_id); 
-
-
-
 
   const handleEditorChange = (content, editor) => {
     setNewComment(content);
@@ -100,6 +98,7 @@ const CustomCard = ({ card }) => {
         <p className="custom-card-question-content">{card.text}</p>
         <form onSubmit={handleCommentSubmit}>
           <label htmlFor="newComment" className="custom-card-form-label">Trả lời</label>
+          {currentUser ? 
           <Editor
           onInit={(evt, editor) => (editorRef.current = editor)}
           apiKey='ubvf47mx487okwyj5ynvjw2ruufjrou0oyb6mq4b8tygjopl'
@@ -119,7 +118,7 @@ const CustomCard = ({ card }) => {
                 bullist numlist outdent indent | removeformat | help'
             }}
             onEditorChange={handleEditorChange}
-          />
+          /> : <> Hãy <Link to={"/login"}> Đăng nhập</Link> để trả lời câu hỏi này nhé! </> }
           <button className="custom-card-submit-btn" type="submit" onClick={handleCommentSubmit}>Gửi</button>
           <button className="custom-card-save-btn" type="button" onClick={handleButtonSave}>{isSaved ? 'Đã lưu!' : 'Lưu câu hỏi'} </button>
           <span>

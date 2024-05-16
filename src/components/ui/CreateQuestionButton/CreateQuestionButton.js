@@ -107,7 +107,6 @@ return (
   )
 }
 
-
 const CreateQuestionButton = () => {
   const [filterState, setFilterState] = useState({
     DahoHelping: 'DahoHelping',
@@ -130,13 +129,15 @@ const CreateQuestionButton = () => {
   });
   const [show, setShow] = useState(false);
   const [A, setA] = useState(0); // Initial value for A
-
+  
     useEffect(() => {
-        // Simulate getting user's score after authentication
+      if (currentUser) {
         const userScore = currentUser.score; // Assume this function retrieves user's score
         setA(userScore); // Set A to user's score
-      }, [currentUser.score]);
-      
+        }
+      }
+      , [currentUser? currentUser.score : null]);
+
     const handleInputChange = (e) => {
       const { name, value } = e.target;
       setFormData({ ...formData, [name]: value });
@@ -145,6 +146,7 @@ const CreateQuestionButton = () => {
       editorRef.current = editor;
       setFormData({ ...formData, content: content });
     };
+
 
 const handleSubmit = () => {
   if (!formData.title || !/^(?![0-9]*$)[A-Za-z0-9]+$/.test(formData.title)) {
@@ -222,7 +224,14 @@ const handleSubmit = () => {
       
   // Send the API request to the backend
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleShow = () => {
+      if (!currentUser) {
+        setShowNotification(true);
+        setNotiSetting({message: 'Bạn phải đăng nhập trước khi đặt câu hỏi!', type: "error"});
+        return;
+      }
+      else setShow(true);
+    }
   
     return (
       <div>

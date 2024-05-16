@@ -2,6 +2,7 @@ import { React, useState,BrowserRouter as Router, FontAwesomeIcon}
     from '../../../utils/import.js';
 import "../../../App.css"
 import { faCode } from '@fortawesome/free-solid-svg-icons';
+import defaultDesc from 'src/assets/icons/default_desc.webp'
 
 function SidebarItem({ subj }) {
     const [cardPosition, setCardPosition] = useState({ x: 0, y: 0 });
@@ -32,7 +33,7 @@ function SidebarItem({ subj }) {
             className="card"
             style={{ zIndex: '1000', width: '50vh', position: 'fixed', top: cardPosition.y, left: cardPosition.x, backgroundColor: 'white', padding: '10px', border: '1px solid gray', display: 'flex' }}
           >
-            <img src= "src/assets/icons/default_desc.webp" alt="Subject Description" style={{ width: '200px', height: '100px' }}/>
+            <img src= {defaultDesc} alt="Subject Description" style={{ width: '200px', height: '100px' }}/>
             <span>{subj.desc}</span>
           </div>
         )}

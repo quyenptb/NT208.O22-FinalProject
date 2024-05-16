@@ -219,7 +219,7 @@ const AppProvider = ({ children }) => {
   const [notisetting, setNotiSetting] = useState([]);
   const [showNotification, setShowNotification] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [currentUser, setCurrentUser] = useState(user[0]); //principal (giả định là user[0])
+  const [currentUser, setCurrentUser] = useState(null); //principal (giả định là user[0])
   const [cards, setCards] = useState([]);
   const [card, setCard] = useState({});
   const [dahoHelping, setDahoHelping] = useState(dahohelping);

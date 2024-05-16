@@ -67,14 +67,13 @@ export default function NavBar() {
   }
 </div>
 
-     
-
         <NavDropdown
           className="account"
           title={<img src={account} alt="account" style={{ width: '50px', height: '50px' }} />}
           id="basic-nav-dropdown"
         >
-          {currentUser ? (
+          {console.log("Day la", currentUser)}
+          {currentUser != null ? (
             <>
               <NavDropdown.Item href="/users/me">Thông tin cá nhân</NavDropdown.Item>
               <NavDropdown.Item href="/logout">Đăng xuất</NavDropdown.Item>

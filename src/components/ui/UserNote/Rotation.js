@@ -9,7 +9,6 @@ export default function Rotation({userName}) {
     const {currentUser} = useContext(AppContext);
     const ban = "bạn";
     return ( 
-         currentUser ? 
       <div className="outer-heading" style={{fontFamily: 'sans-serif'}}>
           <WeatherComponent id={1} city={'Ho Chi Minh City'}/>
           { currentUser ? <WeatherComponent id={2} city={currentUser.hometown}/> : <></>  }
@@ -23,6 +22,6 @@ export default function Rotation({userName}) {
                   </div>
                   {currentUser ? <></> : <p> Đăng nhập ngay! </p>}
               </h1>
-          </div> : <></>
+          </div>
     )
 }

@@ -13,12 +13,8 @@ export default function AnsweringPage() {
 
   let { slug } = useParams();
 
-
-
   let   v_card = cards.find((_card) => _card.card_id == slug);
 
-
-    
     return (
       <div>
       <NavBar/>

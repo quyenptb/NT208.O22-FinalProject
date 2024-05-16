@@ -25,8 +25,15 @@ export const signin = async (user) => {
   }
 };
 
-export const logout = () => {
-  localStorage.removeItem("token");
+export const logout = async () => {
+  try {
+    await axios.post('api/logout');
+    localStorage.removeItem('token');
+    window.location.href = '/homepage'; 
+  } catch (e) {
+    console.log('Error logging out', e);
+    throw new Error('Logout failed');
+  }
 };
 
 export const getCurrentToken = () => {

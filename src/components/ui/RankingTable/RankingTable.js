@@ -22,9 +22,9 @@ export default function RankingTable() {
             <tr>
           <th scope="row">{user.id}</th>
            
-            <td><a href='#'>{user.name}</a></td>
+            <td><a href="/user/`${user.id}`">{user.name}</a></td>
             <td>
-              <img src={user.uni} style={{ width: '52px', height: '50px' }} alt={user.uni} />
+              <img src={require(`src/assets/icons/${user.uni}.png`)} style={{ width: '52px', height: '50px' }} alt={user.uni} />
             </td>
             <td>{user.score}</td>
             </tr>
