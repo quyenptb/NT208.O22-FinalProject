@@ -15,10 +15,10 @@ function AuthCallback() {
         try {
           const response = await axios.post('https://oauth2.googleapis.com/token', {
             code: authorizationCode,
-            client_id: '940988695510-6if6nnnq6k6chc6u2n60et060p26mbbt.apps.googleusercontent.com',
-            client_secret: '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',
-            redirect_uri: 'http://localhost:3000/auth/callback',
-            grant_type: 'authorization_code',
+            client_id: '',
+            client_secret: '',
+            redirect_uri: '',
+            grant_type: '',
           });
           const accessToken = response.data.access_token;
 
