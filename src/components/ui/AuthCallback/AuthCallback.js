@@ -13,7 +13,7 @@ function AuthCallback() {
       // Gửi mã xác thực đến server hoặc trực tiếp đến Google để lấy mã thông báo truy cập
       const getAccessToken = async () => {
         try {
-          const response = await axios.post('https://oauth2.googleapis.com/token', {
+          const response = await axios.post('', {
             code: authorizationCode,
             client_id: '',
             client_secret: '',
@@ -23,7 +23,7 @@ function AuthCallback() {
           const accessToken = response.data.access_token;
 
           // Lấy thông tin người dùng với accessToken
-          const userInfoResponse = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${accessToken}`);
+          const userInfoResponse = await axios.get(``);
           const userInfo = userInfoResponse.data;
 
           // Xử lý thông tin người dùng
