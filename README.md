@@ -1,3 +1,4 @@
+## The latest version of this project is available on the [final branch](https://github.com/Anhtocdai/NT208.O22-FinalProject/tree/final).
 
 ## Authors
 
@@ -120,7 +121,7 @@ const config = {
 };
 ```
 
-### Installing nvm
+## Installing nvm
 
 To install nvm, follow these steps:
 
