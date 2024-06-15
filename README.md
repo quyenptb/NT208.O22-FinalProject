@@ -4,12 +4,12 @@
 
 ## Authors
 
-| Name                       | Student ID        | GitHub                              | Gmail                       |
-|----------------------------|-----------|-------------------------------------|-------------------------------------|
-| Dương Minh Mẫn             | 19521821  |                                     | 19521821@gm.uit.edu.vn              |
-| Bùi Quốc Cường             | 20521147  |                                     | 20521147@gm.uit.edu.vn              |
-| [Nguyễn Thành Tài](https://github.com/taint3110) | 21521397  | [GitHub](https://github.com/taint3110)   | 21521397@gm.uit.edu.vn              |
-| [Phan Thị Bích Quyên](https://github.com/Anhtocdai) | 22521224  | [GitHub](https://github.com/Anhtocdai)   | 22521224@gm.uit.edu.vn              |
+| Name                       | Student ID        | GitHub                              | Gmail                       | Role  |
+|----------------------------|-----------|-------------------------------------|-------------------------------------|-------|
+| Dương Minh Mẫn             | 19521821  |                                     | 19521821@gm.uit.edu.vn              |Front-end suppoter|
+| Bùi Quốc Cường             | 20521147  |                                     | 20521147@gm.uit.edu.vn              |Front-end suppoter|
+| [Nguyễn Thành Tài](https://github.com/taint3110) | 21521397  | [GitHub](https://github.com/taint3110)   | 21521397@gm.uit.edu.vn              |Backend|
+| [Phan Thị Bích Quyên (Leader)](https://github.com/Anhtocdai) | 22521224  | [GitHub](https://github.com/Anhtocdai)   | 22521224@gm.uit.edu.vn              | Front-end, Backend supporter|
 
 # DahoHelping - Website Forum Sinh viên Đại học Quốc gia Thành phố Hồ Chí Minh
 
