@@ -2,7 +2,7 @@
 ## The Answer of the Q&A part in Seminar "Introduction to VueJs" is avaliable [here](https://drive.google.com/file/d/1EQncT3vHWxreQSsE6B6tFM3DfbC3kLkt/view?usp=sharing)
 
 
-## Authors
+## Group 15
 
 | Name                       | Student ID        | GitHub                              | Gmail                       | Role  |
 |----------------------------|-----------|-------------------------------------|-------------------------------------|-------|
