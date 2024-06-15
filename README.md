@@ -1,41 +1,195 @@
-# NT208.O22- Nhóm 15: DahoHelping
+
+## Authors
+
+| Name                       | Student ID        | GitHub                              | Gmail                       |
+|----------------------------|-----------|-------------------------------------|-------------------------------------|
+| Dương Minh Mẫn             | 19521821  |                                     | 19521821@gm.uit.edu.vn              |
+| Bùi Quốc Cường             | 20521147  |                                     | 20521147@gm.uit.edu.vn              |
+| [Nguyễn Thành Tài](https://github.com/taint3110) | 21521397  | [GitHub](https://github.com/taint3110)   | 21521397@gm.uit.edu.vn              |
+| [Phan Thị Bích Quyên](https://github.com/Anhtocdai) | 22521224  | [GitHub](https://github.com/Anhtocdai)   | 22521224@gm.uit.edu.vn              |
+
+# DahoHelping - Website Forum Sinh viên Đại học Quốc gia Thành phố Hồ Chí Minh
+
+![Logo](https://github.com/Anhtocdai/NT208.O22-FinalProject/blob/main/icon/DahoHelping.png?raw=true)
+
+## Description
 
 
-# DahoHelping
 
-Chào mừng bạn đến với DahoHelping - trang web hỗ trợ học sinh, sinh viên của Đại học Quốc gia Thành phố Hồ Chí Minh.
+DahoHelping là trang web với ý tưởng thuộc sở hữu của Đại học Quốc gia Thành phố Hồ Chí Minh. Được ra đời vào năm 2024 bởi ý tưởng của nhóm sinh viên trường Đại học Công nghệ thông tin, DahoHelping mong muốn trở thành địa chỉ tin cậy để các bạn học sinh, sinh viên toàn hệ thống ĐHQG hỏi đáp, chia sẻ, giúp đỡ nhau trong học tập và cuộc sống. Với giao diện đơn giản, dễ sử dụng, chức năng phong phú và độ an toàn cao, DahoHelping không ngừng phát triển để hướng tới việc trở thành trang Forum học sinh, sinh viên tốt nhất trên toàn địa bàn thành phố Hồ Chí Minh
 
-## Giới thiệu
 
-DahoHelping được thành lập vào năm 2024 bởi nhóm sinh viên trường Đại học Công nghệ thông tin. Chúng tôi cung cấp một nền tảng đáng tin cậy để hỏi đáp, chia sẻ kiến thức và kinh nghiệm học tập.
 
-## Tính năng cơ bản
-![alt text](image.png)
-- Đăng kí tài khoản, Đăng nhập dành cho người dùng và Admin
-- Trang chủ hiển thị liên tục các câu hỏi/yêu cầu từ người dùng
-- Lọc câu hỏi theo trường Đại học, Khoa, Ngành. Đặc biệt, loại câu hỏi **DahoHelping** dành riêng cho chủ đề đời sống sinh viên
-- Mỗi người dùng sẽ có một điểm tích lũy. Người đăng sẽ sử dụng điểm này để đăng câu hỏi, người trả lời có câu trả lời đúng nhất sẽ nhận được số điểm này
-- Riêng với câu hỏi DahoHelping, người đăng có thể trả phí bằng tiền mặt (VNĐ) theo thỏa thuận với người trả lời
-- Bảng xếp hạng theo ngày, tuần, tháng. Tích lũy đủ mức điểm sẽ nhận được phần quà từ trang web. Trang web liên kết với các trường Đại học thành viên để quy đổi thành điểm rèn luyện
-- Nếu câu hỏi quá thời gian không có câu trả lời, người đăng có thể chọn mất thêm điểm để AI trả lời
-- Tính năng nhận thông báo trực tiếp mỗi khi có câu hỏi về chủ đề người dùng quan tâm
-- Tính năng xuất ra dữ liệu thống kê để các trường Đại học trong hệ thống, KTX-ĐHQG nắm bắt tình hình học tập và đời sống sinh viên, hỗ trợ đưa ra quyết định hoặc nghiên cứu khoa học.
+## Tech Stack
 
-- Giao diện **đơn giản**, **dễ sử dụng**
-- Chức năng **phong phú**
-- Độ **an toàn cao**
+**Client:**
 
-## Liên hệ
+![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white&style=flat-square) **React:** JavaScript library for building user interfaces.
 
-- Dương Minh Mẫn
-- Nguyễn Thành Tài
-- Bùi Quốc Cường
-- Phan Thị Bích Quyên
+![Context API](https://img.shields.io/badge/-Context%20API-5C2D91?logo=react&logoColor=white&style=flat-square) **React Context API:** State management tool for React applications.
 
-## Tài liệu tham khảo
+![React Router](https://img.shields.io/badge/-React%20Router-CA4245?logo=react-router&logoColor=white&style=flat-square) **React Router DOM:** Declarative routing for React applications.
 
-Đang cập nhật...
+![Bootstrap](https://img.shields.io/badge/-Bootstrap-7952B3?logo=bootstrap&logoColor=white&style=flat-square) **Bootstrap:** Front-end framework for building responsive and mobile-first websites.
 
-## Bản quyền
+**Server:**
 
-© 2024 DahoHelping.com
+![Node.js](https://img.shields.io/badge/-Node.js-339933?logo=node.js&logoColor=white&style=flat-square) **Node.js:** JavaScript runtime built on Chrome's V8 JavaScript engine.
+
+![Express](https://img.shields.io/badge/-Express-000000?logo=express&logoColor=white&style=flat-square) **Express:** Web application framework for Node.js.
+
+![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?logo=typescript&logoColor=white&style=flat-square) **TypeScript:** Typed superset of JavaScript that compiles to plain JavaScript.
+
+![MongoDB](https://img.shields.io/badge/-MongoDB-47A248?logo=mongodb&logoColor=white&style=flat-square) **MongoDB:** Document-oriented NoSQL database used for high volume data storage.
+
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`REACT_APP_OPEN_WEATHER_KEY`: Your API key for OpenWeather
+
+`REACT_APP_GOOGLE_CLIENT_ID`: Your Client ID for Google Login
+
+`REACT_APP_TINYMCE_KEY`: Your API key for TinyMCE
+
+
+
+## Prerequisites
+
+Before you begin, ensure you have met the following requirement:
+
+- You have installed the latest version of [MongoDB](https://www.mongodb.com/try/download/community).
+- You have installed the latest version of [nvm (Node Version Manager)](https://github.com/nvm-sh/nvm). nvm helps you manage multiple Node.js versions.
+
+## Download MongoDB Tools
+
+**Download MongoDB Database Tools:**
+   - Go to [MongoDB Database Tools](https://www.mongodb.com/try/download/database-tools).
+   - Download and install the tools for your operating system.
+
+## Restore Data to MongoDB
+
+ **Start MongoDB Server:**
+
+Make sure your MongoDB server is running.
+
+```
+mongod --config /usr/local/etc/mongod.conf # Path to your mongod configuration file
+```
+**Restore the Data Dump:**
+
+Use mongorestore to import the data into your MongoDB instance.
+
+```
+mongorestore --uri="your_mongodb_uri" dump_directory
+```
+
+Replace your_mongodb_uri with your MongoDB connection string, and dump_directory with the path to the extracted dump directory (which is in backend/daho-backend/dump folder).
+
+Example:
+
+
+```
+mongorestore --uri="mongodb://localhost:27017" ./dump
+```
+**MongoDB Connection URI**
+
+To connect your application to MongoDB, you will need to use a connection URI. Here is an example of a connection URI:
+
+
+```
+mongodb://localhost:27017/your_dbname
+```
+Replace localhost with your MongoDB server address and your_dbname with the name of your database.
+
+**Setting Up Connection String in Backend Datasource**
+
+To run your project, you will need to add your MongoDB connection string in backend/daho-backend/src/datasources/mongodb.datasource.ts. For instance:
+```
+const config = {
+  name: 'mongodb',
+  connector: 'mongodb',
+  url: '', //add your connection string here
+  host: '',
+  port: 0,
+  user: '',
+  password: '',
+  database: 'mongodb',
+  useNewUrlParser: false
+};
+```
+
+### Installing nvm
+
+To install nvm, follow these steps:
+
+#### For macOS and Linux:
+
+Open your terminal and run:
+
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+
+or
+
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+```
+
+#### For Windows:
+Download and run the installer from the [nvm](https://github.com/nvm-sh/nvm) repository.
+
+
+#### Using nvm to install Node.js
+After installing nvm, you can install Node.js by running:
+
+```bash
+nvm install node # "node" is an alias for the latest version
+```
+
+You should install this versions of Node.js for frontend:
+
+```bash
+nvm install 21.2.0
+```
+and this for backend:
+
+```bash
+nvm install 18.1.0 
+```
+
+## Run Locally
+
+
+
+* Clone the project
+
+```bash
+  git clone https://github.com/Anhtocdai/NT208.O22-FinalProject.git
+```
+
+* Client setup
+
+Make sure you have npm version 21.2.0 installed before you start.
+
+```bash
+nvm use 21.2.0
+cd web-nt-1
+yarn install
+yarn start
+```
+
+
+* Server setup
+
+
+Make sure you have npm version 18.1.0 installed before you start.
+
+```bash
+nvm use 18.1.0
+cd backend
+cd daho-backend
+npm install
+npm start
+```
+
