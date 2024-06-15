@@ -50,11 +50,11 @@ DahoHelping là trang web với ý tưởng thuộc sở hữu của Đại họ
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`REACT_APP_OPEN_WEATHER_KEY`: Your API key for OpenWeather
+`REACT_APP_OPEN_WEATHER_KEY`: Your API key for [OpenWeather](https://openweathermap.org/api)
 
-`REACT_APP_GOOGLE_CLIENT_ID`: Your Client ID for Google Login
+`REACT_APP_GOOGLE_CLIENT_ID`: Your Client ID for [Google Login](https://console.cloud.google.com/)
 
-`REACT_APP_TINYMCE_KEY`: Your API key for TinyMCE
+`REACT_APP_TINYMCE_KEY`: Your API key for [TinyMCE](https://www.tiny.cloud/)
 
 
 
@@ -195,4 +195,8 @@ cd daho-backend
 npm install
 npm start
 ```
+
+## Contact
+I appreciate your time reading and enjoy using this website. 
+Please feel free to contact me if you have any questions. I will always be willing to answer it. The fastest way is contact with my Zalo account (0358749792).
 
