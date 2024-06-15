@@ -13,7 +13,10 @@
 
 # DahoHelping - Website Forum Sinh viên Đại học Quốc gia Thành phố Hồ Chí Minh
 
-![Logo](https://github.com/Anhtocdai/NT208.O22-FinalProject/blob/main/icon/DahoHelping.png?raw=true)
+<p align="center">
+  <img src="https://github.com/Anhtocdai/NT208.O22-FinalProject/blob/main/icon/DahoHelping.png?raw=true" alt="Logo">
+</p>
+
 
 ## Description
 
