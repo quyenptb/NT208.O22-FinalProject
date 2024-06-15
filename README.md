@@ -1,4 +1,6 @@
 ## The latest version of this project is available on the [final branch](https://github.com/Anhtocdai/NT208.O22-FinalProject/tree/final).
+## The Answer of the Q&A part in Seminar "Introduction to VueJs" is avaliable [here](https://drive.google.com/file/d/1EQncT3vHWxreQSsE6B6tFM3DfbC3kLkt/view?usp=sharing)
+
 
 ## Authors
 
