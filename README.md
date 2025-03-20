@@ -1,4 +1,4 @@
-## The latest version of this project is available on the [final branch](https://github.com/Anhtocdai/NT208.O22-FinalProject/tree/final).
+## The latest version of this project is available on the [final branch](https://github.com/quyenptb/NT208.O22-FinalProject/tree/final).
 ## The Answer of the Q&A part in Seminar "Introduction to VueJs" is avaliable [here](https://drive.google.com/file/d/1EQncT3vHWxreQSsE6B6tFM3DfbC3kLkt/view?usp=sharing)
 
 
@@ -9,12 +9,12 @@
 | Dương Minh Mẫn             | 19521821  |                                     | 19521821@gm.uit.edu.vn              |Front-end suppoter|
 | Bùi Quốc Cường             | 20521147  |                                     | 20521147@gm.uit.edu.vn              |Front-end suppoter|
 | [Nguyễn Thành Tài](https://github.com/taint3110) | 21521397  | [GitHub](https://github.com/taint3110)   | 21521397@gm.uit.edu.vn              |Backend|
-| [Phan Thị Bích Quyên (Leader)](https://github.com/Anhtocdai) | 22521224  | [GitHub](https://github.com/Anhtocdai)   | 22521224@gm.uit.edu.vn              | Front-end, Backend supporter|
+| [Phan Thị Bích Quyên (Leader)](https://github.com/quyenptb) | 22521224  | [GitHub](https://github.com/quyenptb)   | 22521224@gm.uit.edu.vn              | Front-end, Backend supporter|
 
 # DahoHelping - Website Forum Sinh viên Đại học Quốc gia Thành phố Hồ Chí Minh
 
 <p align="center">
-  <img src="https://github.com/Anhtocdai/NT208.O22-FinalProject/blob/main/icon/DahoHelping.png?raw=true" alt="Logo">
+  <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/icon/DahoHelping.png?raw=true" alt="Logo">
 </p>
 
 
@@ -171,7 +171,7 @@ nvm install 18.1.0
 * Clone the project
 
 ```bash
-  git clone https://github.com/Anhtocdai/NT208.O22-FinalProject.git
+  git clone https://github.com/quyenptb/NT208.O22-FinalProject.git
 ```
 
 * Client setup
