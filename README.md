@@ -24,6 +24,11 @@
 
 DahoHelping là trang web với ý tưởng thuộc sở hữu của Đại học Quốc gia Thành phố Hồ Chí Minh. Được ra đời vào năm 2024 bởi ý tưởng của nhóm sinh viên trường Đại học Công nghệ thông tin, DahoHelping mong muốn trở thành địa chỉ tin cậy để các bạn học sinh, sinh viên toàn hệ thống ĐHQG hỏi đáp, chia sẻ, giúp đỡ nhau trong học tập và cuộc sống. Với giao diện đơn giản, dễ sử dụng, chức năng phong phú và độ an toàn cao, DahoHelping không ngừng phát triển để hướng tới việc trở thành trang Forum học sinh, sinh viên tốt nhất trên toàn địa bàn thành phố Hồ Chí Minh
 
+## 📸 Giao diện ứng dụng
+
+### 🔹 Trang chủ
+![Homepage](https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/trangchu.jpg?raw=true)
+
 
 
 ## Tech Stack
