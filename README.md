@@ -1,4 +1,4 @@
-## The latest version of this project is available on the [final branch](https://github.com/quyenptb/NT208.O22-FinalProject/tree/final).
+![image](https://github.com/user-attachments/assets/f1913c62-e8a6-4768-8702-eda93efe2991)![image](https://github.com/user-attachments/assets/12e7d8c4-d9b9-48c7-96c0-cf61a7a0b55d)## The latest version of this project is available on the [final branch](https://github.com/quyenptb/NT208.O22-FinalProject/tree/final).
 ## The Answer of the Q&A part in Seminar "Introduction to VueJs" is avaliable [here](https://drive.google.com/file/d/1EQncT3vHWxreQSsE6B6tFM3DfbC3kLkt/view?usp=sharing)
 
 
@@ -24,6 +24,22 @@
 
 DahoHelping là trang web với ý tưởng thuộc sở hữu của Đại học Quốc gia Thành phố Hồ Chí Minh. Được ra đời vào năm 2024 bởi ý tưởng của nhóm sinh viên trường Đại học Công nghệ thông tin, DahoHelping mong muốn trở thành địa chỉ tin cậy để các bạn học sinh, sinh viên toàn hệ thống ĐHQG hỏi đáp, chia sẻ, giúp đỡ nhau trong học tập và cuộc sống. Với giao diện đơn giản, dễ sử dụng, chức năng phong phú và độ an toàn cao, DahoHelping không ngừng phát triển để hướng tới việc trở thành trang Forum học sinh, sinh viên tốt nhất trên toàn địa bàn thành phố Hồ Chí Minh
 
+## Use Case Diagram
+<div align="center">
+  <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/usecase.jpg?raw=true">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/usecase.jpg?raw=true" width="400">
+  </a>
+</div>
+
+
+## Database Diagram
+<div align="center">
+  <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/csdl.jpg?raw=true">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/csdl.jpg?raw=true" width="400">
+  </a>
+</div>
+
+
 ## 📸 Frontend
 
 ### 🔹 Homepage
@@ -32,6 +48,43 @@ DahoHelping là trang web với ý tưởng thuộc sở hữu của Đại họ
     <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/trangchu.jpg?raw=true" width="400">
   </a>
 </div>
+
+### 🔹 Question page
+<div align="center">
+  <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/cauhoi.png?raw=true">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/cauhoi.png?raw=true" width="400">
+  </a>
+</div>
+
+### 🔹 User page
+<div align="center">
+  <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/trangcanhan.png?raw=true">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/trangcanhan.png?raw=true" width="400">
+  </a>
+</div>
+
+### 🔹 Behaviour Score page
+<div align="center">
+  <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/drl.png?raw=true">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/drl.png?raw=true" width="400">
+  </a>
+</div>
+
+### 🔹 Sign up
+<div align="center">
+  <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/dangki.png?raw=true">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/dangki.png?raw=true" width="400">
+  </a>
+</div>
+
+
+### 🔹 Sign in
+<div align="center">
+  <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/dangnhap.png?raw=true">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/dangnhap.png?raw=true" width="400">
+  </a>
+</div>
+
 
 
 ## Tech Stack
