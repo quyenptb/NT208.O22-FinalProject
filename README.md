@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/f1913c62-e8a6-4768-8702-eda93efe2991)![image](https://github.com/user-attachments/assets/12e7d8c4-d9b9-48c7-96c0-cf61a7a0b55d)## The latest version of this project is available on the [final branch](https://github.com/quyenptb/NT208.O22-FinalProject/tree/final).
+## The latest version of this project is available on the [final branch](https://github.com/quyenptb/NT208.O22-FinalProject/tree/final).
 ## The Answer of the Q&A part in Seminar "Introduction to VueJs" is avaliable [here](https://drive.google.com/file/d/1EQncT3vHWxreQSsE6B6tFM3DfbC3kLkt/view?usp=sharing)
 
 
