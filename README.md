@@ -27,7 +27,7 @@ DahoHelping là trang web với ý tưởng thuộc sở hữu của Đại họ
 ## Use Case Diagram
 <div align="center">
   <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/usecase.jpg?raw=true">
-    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/usecase.jpg?raw=true" width="600">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/usecase.jpg?raw=true" width="auto">
   </a>
 </div>
 
@@ -35,7 +35,7 @@ DahoHelping là trang web với ý tưởng thuộc sở hữu của Đại họ
 ## Database Diagram
 <div align="center">
   <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/csdl.jpg?raw=true">
-    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/csdl.jpg?raw=true" width="600">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/csdl.jpg?raw=true" width="auto">
   </a>
 </div>
 
@@ -45,35 +45,35 @@ DahoHelping là trang web với ý tưởng thuộc sở hữu của Đại họ
 ### 🔹 Homepage
 <div align="center">
   <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/trangchu.jpg?raw=true">
-    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/trangchu.jpg?raw=true" width="400">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/trangchu.jpg?raw=true" width="600">
   </a>
 </div>
 
 ### 🔹 Question page
 <div align="center">
   <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/cauhoi.png?raw=true">
-    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/cauhoi.png?raw=true" width="400">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/cauhoi.png?raw=true" width="600">
   </a>
 </div>
 
 ### 🔹 User page
 <div align="center">
   <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/trangcanhan.png?raw=true">
-    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/trangcanhan.png?raw=true" width="400">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/trangcanhan.png?raw=true" width="600">
   </a>
 </div>
 
 ### 🔹 Behaviour Score page
 <div align="center">
   <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/drl.png?raw=true">
-    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/drl.png?raw=true" width="400">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/drl.png?raw=true" width="600">
   </a>
 </div>
 
 ### 🔹 Sign up
 <div align="center">
   <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/dangki.png?raw=true">
-    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/dangki.png?raw=true" width="400">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/dangki.png?raw=true" width="600">
   </a>
 </div>
 
@@ -81,7 +81,7 @@ DahoHelping là trang web với ý tưởng thuộc sở hữu của Đại họ
 ### 🔹 Sign in
 <div align="center">
   <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/dangnhap.png?raw=true">
-    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/dangnhap.png?raw=true" width="400">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/dangnhap.png?raw=true" width="600">
   </a>
 </div>
 
