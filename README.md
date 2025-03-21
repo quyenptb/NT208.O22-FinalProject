@@ -27,7 +27,7 @@ DahoHelping là trang web với ý tưởng thuộc sở hữu của Đại họ
 ## 📸 Giao diện ứng dụng
 
 ### 🔹 Trang chủ
-![Homepage](https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/trangchu.jpg?raw=true)
+[<img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/trangchu.jpg?raw=true" width="400">]([https://github.com/quyenptb/your-repo/blob/main/screenshots/homepage.png?raw=true](https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/trangchu.jpg?raw=true))
 
 
 
