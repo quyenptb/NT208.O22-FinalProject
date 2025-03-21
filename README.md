@@ -27,7 +27,7 @@ DahoHelping là trang web với ý tưởng thuộc sở hữu của Đại họ
 ## Use Case Diagram
 <div align="center">
   <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/usecase.jpg?raw=true">
-    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/usecase.jpg?raw=true" width="400">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/usecase.jpg?raw=true" width="600">
   </a>
 </div>
 
@@ -35,7 +35,7 @@ DahoHelping là trang web với ý tưởng thuộc sở hữu của Đại họ
 ## Database Diagram
 <div align="center">
   <a href="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/csdl.jpg?raw=true">
-    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/csdl.jpg?raw=true" width="400">
+    <img src="https://github.com/quyenptb/NT208.O22-FinalProject/blob/main/csdl.jpg?raw=true" width="600">
   </a>
 </div>
 
